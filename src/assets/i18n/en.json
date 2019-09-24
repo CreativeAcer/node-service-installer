@@ -1,0 +1,15 @@
+{
+  "PAGES": {
+      "HOME": {
+          "TITLE": "Welcome to the application",
+          "INSTALLBTN": "Install service",
+          "UNINSTALLBTN": "Uninstall service"
+      },
+      "INSTALL": {
+        "TITLE": "Welcome to the installation"
+      },
+      "UNINSTALL": {
+        "TITLE": "Welcome to the uninstallation"
+      }
+  }
+}
