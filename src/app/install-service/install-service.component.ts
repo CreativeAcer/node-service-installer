@@ -13,7 +13,7 @@ export class InstallServiceComponent implements OnInit {
   installForm = new FormGroup({
     scriptName: new FormControl('', Validators.required),
     scriptDesc: new FormControl('', Validators.required),
-    scriptPath: new FormControl('', Validators.required),
+    scriptPath: new FormControl({value:'', disabled: true}, Validators.required),
   });
 
   constructor(private electronService: ElectronService) {
@@ -34,8 +34,8 @@ export class InstallServiceComponent implements OnInit {
     // Some data that will be sent to the main process
     this.electronService.remote.dialog.showOpenDialog(this.electronService.remote.getCurrentWindow(), {
       filters: [{
-        name: 'Scripts',
-        extensions: ['.js']
+        name: 'JavaScript',
+        extensions: ['js']
       }],
       properties: ['openFile']
     },
@@ -52,9 +52,9 @@ export class InstallServiceComponent implements OnInit {
 
   install(){
     let Data = {
-      name: this.installForm.get('scriptName'),
-      description: this.installForm.get('scriptDesc'),
-      script: this.installForm.get('scriptPath')
+      name: this.installForm.get('scriptName').value,
+      description: this.installForm.get('scriptDesc').value,
+      script: this.installForm.get('scriptPath').value
     };
 
     // demo script 'D:\\dev\\GitHub\\ServiceInstaller\\src\\assets\\HelloWorld.js'
