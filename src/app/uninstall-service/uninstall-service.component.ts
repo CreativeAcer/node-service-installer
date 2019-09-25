@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { WindowsService } from '../windowsservice/windows-service.service';
 
 @Component({
   selector: 'app-uninstall-service',
@@ -9,7 +8,7 @@ import { WindowsService } from '../windowsservice/windows-service.service';
 export class UninstallServiceComponent implements OnInit {
   private uninstallerService: any;
 
-  constructor(private windowsservice: WindowsService) {
+  constructor() {
     
   }
 

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { WindowsService } from '../windowsservice/windows-service.service';
 import { ElectronService } from '../core/services';
 
 @Component({
@@ -9,7 +8,7 @@ import { ElectronService } from '../core/services';
 })
 export class InstallServiceComponent implements OnInit {
 
-  constructor(private windowsservice: WindowsService, private electronService: ElectronService) {
+  constructor(private electronService: ElectronService) {
     
   }
 
