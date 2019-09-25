@@ -27,7 +27,7 @@ export class InstallServiceComponent implements OnInit {
     this.electronService.remote.dialog.showOpenDialog(this.electronService.remote.getCurrentWindow(), {
       filters: [{
         name: 'Scripts',
-        extensions: []
+        extensions: ['.js']
       }],
       properties: ['openFile']
     },
