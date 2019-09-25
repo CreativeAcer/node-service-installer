@@ -1,12 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { ElectronService } from '../core/services';
 
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+
 @Component({
   selector: 'app-install-service',
   templateUrl: './install-service.component.html',
   styleUrls: ['./install-service.component.scss']
 })
 export class InstallServiceComponent implements OnInit {
+  
+  installForm = new FormGroup({
+    scriptName: new FormControl('', Validators.required),
+    scriptDesc: new FormControl('', Validators.required),
+  });
 
   constructor(private electronService: ElectronService) {
     
@@ -19,6 +26,11 @@ export class InstallServiceComponent implements OnInit {
     this.electronService.ipcRenderer.on('InstallServiceError', (event, arg) => {
       console.log(arg); 
     });
+  }
+
+  onSubmit() {
+    // TODO: Use EventEmitter with form value
+    console.warn(this.installForm.value);
   }
 
   install(){
