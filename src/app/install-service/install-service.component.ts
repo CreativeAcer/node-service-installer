@@ -13,6 +13,7 @@ export class InstallServiceComponent implements OnInit {
   installForm = new FormGroup({
     scriptName: new FormControl('', Validators.required),
     scriptDesc: new FormControl('', Validators.required),
+    scriptPath: new FormControl('', Validators.required),
   });
 
   constructor(private electronService: ElectronService) {
@@ -28,13 +29,8 @@ export class InstallServiceComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    // TODO: Use EventEmitter with form value
-    console.warn(this.installForm.value);
-  }
-
-  install(){
-    // this.windowsservice.install('testService', 'service pure for testing',  'D:\\dev\\GitHub\\ServiceInstaller\\src\\assets\\HelloWorld.js');
+  selectScript() {
+// this.windowsservice.install('testService', 'service pure for testing',  'D:\\dev\\GitHub\\ServiceInstaller\\src\\assets\\HelloWorld.js');
     // Some data that will be sent to the main process
     this.electronService.remote.dialog.showOpenDialog(this.electronService.remote.getCurrentWindow(), {
       filters: [{
@@ -48,20 +44,24 @@ export class InstallServiceComponent implements OnInit {
         return;
       }
       if (filepaths && filepaths[0]) {
-        let Data = {
-          name: 'testService',
-          description: 'service pure for testing',
-          script: filepaths[0]
-        };
-    
-        // demo script 'D:\\dev\\GitHub\\ServiceInstaller\\src\\assets\\HelloWorld.js'
-        // Send information to the main process
-        // if a listener has been set, then the main process
-        // will react to the request !
-        this.electronService.ipcRenderer.send('InstallService', Data);
+        this.installForm.controls['scriptPath'].setValue(filepaths[0]);
       }
       return;
     }.bind(this));
+  }
+
+  install(){
+    let Data = {
+      name: this.installForm.get('scriptName'),
+      description: this.installForm.get('scriptDesc'),
+      script: this.installForm.get('scriptPath')
+    };
+
+    // demo script 'D:\\dev\\GitHub\\ServiceInstaller\\src\\assets\\HelloWorld.js'
+    // Send information to the main process
+    // if a listener has been set, then the main process
+    // will react to the request !
+    this.electronService.ipcRenderer.send('InstallService', Data);
   }
 
 }

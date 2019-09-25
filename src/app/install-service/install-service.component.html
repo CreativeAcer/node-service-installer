@@ -3,17 +3,18 @@
       {{ 'PAGES.INSTALL.TITLE' | translate }}
     </h1>
     <form [formGroup]="installForm" (ngSubmit)="install()">
-  
       <label>
         Script Name:
         <input type="text" formControlName="scriptName">
       </label>
-    
       <label>
         Description:
         <input type="text" formControlName="scriptDesc">
       </label>
-    
+      <label>
+        <button mat-button (click)="selectScript()">Select Script</button>
+        <input type="text" [disabled]="true" formControlName="scriptPath">
+      </label>
     </form>
     <button mat-button type="submit" [disabled]="!installForm.valid">install testscript</button>
   </div>
