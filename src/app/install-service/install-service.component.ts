@@ -19,9 +19,6 @@ export class InstallServiceComponent implements OnInit {
     this.electronService.ipcRenderer.on('InstallServiceError', (event, arg) => {
       console.log(arg); 
     });
-    this.electronService.ipcRenderer.on('UninstallServiceComplete', (event, arg) => {
-      console.log(arg);
-    });
   }
 
   install(){
@@ -37,23 +34,6 @@ export class InstallServiceComponent implements OnInit {
     // if a listener has been set, then the main process
     // will react to the request !
     this.electronService.ipcRenderer.send('InstallService', Data);
-  }
-
-  
-
-  uninstall(){
-    // this.windowsservice.uninstall('testService', 'service pure for testing',  'D:\\dev\\GitHub\\ServiceInstaller\\src\\assets\\HelloWorld.js');
-    // Some data that will be sent to the main process
-    let Data = {
-      name: 'testService',
-      description: 'service pure for testing',
-      script: 'D:\\dev\\GitHub\\ServiceInstaller\\src\\assets\\HelloWorld.js'
-    };
-
-    // Send information to the main process
-    // if a listener has been set, then the main process
-    // will react to the request !
-    this.electronService.ipcRenderer.send('UninstallService', Data);
   }
 
 }
