@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HomeRoutingModule } from './home-routing.module';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 
 import { HomeComponent } from './home.component';
@@ -13,6 +14,6 @@ import { UninstallServiceComponent } from '../uninstall-service/uninstall-servic
 
 @NgModule({
   declarations: [HomeComponent, InstallServiceComponent, UninstallServiceComponent],
-  imports: [CommonModule, SharedModule, HomeRoutingModule, BrowserAnimationsModule, MatButtonModule]
+  imports: [CommonModule, SharedModule, ReactiveFormsModule, HomeRoutingModule, BrowserAnimationsModule, MatButtonModule]
 })
 export class HomeModule {}

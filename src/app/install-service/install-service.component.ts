@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { WindowsService } from '../windowsservice/windows-service.service';
 import { ElectronService } from '../core/services';
+
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-install-service',
@@ -8,8 +9,14 @@ import { ElectronService } from '../core/services';
   styleUrls: ['./install-service.component.scss']
 })
 export class InstallServiceComponent implements OnInit {
+  
+  installForm = new FormGroup({
+    scriptName: new FormControl('', Validators.required),
+    scriptDesc: new FormControl('', Validators.required),
+    scriptPath: new FormControl({value:'', disabled: true}, Validators.required),
+  });
 
-  constructor(private windowsservice: WindowsService, private electronService: ElectronService) {
+  constructor(private electronService: ElectronService) {
     
   }
 
@@ -20,41 +27,41 @@ export class InstallServiceComponent implements OnInit {
     this.electronService.ipcRenderer.on('InstallServiceError', (event, arg) => {
       console.log(arg); 
     });
-    this.electronService.ipcRenderer.on('UninstallServiceComplete', (event, arg) => {
-      console.log(arg);
-    });
+  }
+
+  selectScript() {
+// this.windowsservice.install('testService', 'service pure for testing',  'D:\\dev\\GitHub\\ServiceInstaller\\src\\assets\\HelloWorld.js');
+    // Some data that will be sent to the main process
+    this.electronService.remote.dialog.showOpenDialog(this.electronService.remote.getCurrentWindow(), {
+      filters: [{
+        name: 'JavaScript',
+        extensions: ['js']
+      }],
+      properties: ['openFile']
+    },
+    function (filepaths, bookmarks) {
+      if (filepaths === undefined) {
+        return;
+      }
+      if (filepaths && filepaths[0]) {
+        this.installForm.controls['scriptPath'].setValue(filepaths[0]);
+      }
+      return;
+    }.bind(this));
   }
 
   install(){
-    // this.windowsservice.install('testService', 'service pure for testing',  'D:\\dev\\GitHub\\ServiceInstaller\\src\\assets\\HelloWorld.js');
-    // Some data that will be sent to the main process
     let Data = {
-      name: 'testService',
-      description: 'service pure for testing',
-      script: 'D:\\dev\\GitHub\\ServiceInstaller\\src\\assets\\HelloWorld.js'
+      name: this.installForm.get('scriptName').value,
+      description: this.installForm.get('scriptDesc').value,
+      script: this.installForm.get('scriptPath').value
     };
 
+    // demo script 'D:\\dev\\GitHub\\ServiceInstaller\\src\\assets\\HelloWorld.js'
     // Send information to the main process
     // if a listener has been set, then the main process
     // will react to the request !
     this.electronService.ipcRenderer.send('InstallService', Data);
-  }
-
-  
-
-  uninstall(){
-    // this.windowsservice.uninstall('testService', 'service pure for testing',  'D:\\dev\\GitHub\\ServiceInstaller\\src\\assets\\HelloWorld.js');
-    // Some data that will be sent to the main process
-    let Data = {
-      name: 'testService',
-      description: 'service pure for testing',
-      script: 'D:\\dev\\GitHub\\ServiceInstaller\\src\\assets\\HelloWorld.js'
-    };
-
-    // Send information to the main process
-    // if a listener has been set, then the main process
-    // will react to the request !
-    this.electronService.ipcRenderer.send('UninstallService', Data);
   }
 
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { WindowsService } from '../windowsservice/windows-service.service';
+import { ElectronService } from '../core/services';
 
 @Component({
   selector: 'app-uninstall-service',
@@ -9,11 +9,29 @@ import { WindowsService } from '../windowsservice/windows-service.service';
 export class UninstallServiceComponent implements OnInit {
   private uninstallerService: any;
 
-  constructor(private windowsservice: WindowsService) {
+  constructor(private electronService: ElectronService) {
     
   }
 
   ngOnInit() {
+    this.electronService.ipcRenderer.on('UninstallServiceComplete', (event, arg) => {
+      console.log(arg);
+    });
+  }
+
+  uninstall(){
+    // this.windowsservice.uninstall('testService', 'service pure for testing',  'D:\\dev\\GitHub\\ServiceInstaller\\src\\assets\\HelloWorld.js');
+    // Some data that will be sent to the main process
+    let Data = {
+      name: 'testService',
+      description: 'service pure for testing',
+      script: 'D:\\dev\\GitHub\\ServiceInstaller\\src\\assets\\HelloWorld.js'
+    };
+
+    // Send information to the main process
+    // if a listener has been set, then the main process
+    // will react to the request !
+    this.electronService.ipcRenderer.send('UninstallService', Data);
   }
 
 }

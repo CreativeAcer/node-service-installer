@@ -8,16 +8,18 @@ import { UninstallServiceComponent } from '../uninstall-service/uninstall-servic
 const routes: Routes = [
   {
     path: 'home',
-    component: HomeComponent
-  },
-  {
-    path: 'install',
-    component: InstallServiceComponent
-  },
-  {
-    path: 'uninstall',
-    component: UninstallServiceComponent
-  },
+    component: HomeComponent,
+    children: [
+      {
+        path: 'install',
+        component: InstallServiceComponent
+      },
+      {
+        path: 'uninstall',
+        component: UninstallServiceComponent
+      }
+    ]
+  }
 ];
 
 @NgModule({
