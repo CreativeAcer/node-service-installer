@@ -1,6 +1,7 @@
 import { app, BrowserWindow, screen, ipcMain } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
+import * as fs from 'fs';
 
 let NodeWindowsService = require('node-windows').Service
 let wincmd = require('node-windows');
@@ -52,8 +53,33 @@ function createWindow() {
 
 }
 
+
+ipcMain.on('getVersion', (event, arg) => {
+  event.sender.send('appVersion', app.getVersion());
+})
+
 // Attach listener in the main process with the given ID
 ipcMain.on('InstallService', (event, arg) => {
+  // check if custom dir exists in app data folder
+  const appStorageDir = app.getPath('userData') + '\\installedScripts';
+  if (fs.existsSync(appStorageDir)) {
+    // Copy script into folder for future use
+    fs.copyFile(arg.script, appStorageDir + '\\' + arg.name + '.js', (err) => {
+         if (err) event.sender.send('InstallServiceError', "Could not copy file to directory: " + appStorageDir);
+         event.sender.send('InstallServiceComplete', "file copied to: " + appStorageDir);
+    });
+  }else {
+    // Create folder first
+    fs.mkdir(appStorageDir, { recursive: false }, function(err){
+      if(err){event.sender.send('InstallServiceError', "Could not create needed directory, please create folder installedScripts in the following location" +app.getPath('userData'));}
+      fs.copyFile(arg.script, appStorageDir + '\\' + arg.name + '.js', (err) => {
+        if (err) event.sender.send('InstallServiceError', "Could not copy file to directory: " + appStorageDir);
+        event.sender.send('InstallServiceComplete', "file copied to: " + appStorageDir);
+      });
+    });
+  }
+
+  /*
   let svc = new NodeWindowsService({
     name: arg.name,
     description: arg.description,
@@ -68,6 +94,7 @@ ipcMain.on('InstallService', (event, arg) => {
     event.sender.send('InstallServiceError', "This service is already installed!");
   });
   svc.install();
+  */
 });
 // Attach listener in the main process with the given ID
 ipcMain.on('UninstallService', (event, arg) => {
