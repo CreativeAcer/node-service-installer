@@ -7,10 +7,11 @@ import { ElectronService } from '../core/services';
   styleUrls: ['./uninstall-service.component.scss']
 })
 export class UninstallServiceComponent implements OnInit {
+  servicedata: any;
 
   constructor(private electronService: ElectronService) {
     this.electronService.ipcRenderer.on('allInstalledServices', (event, arg) => {
-      console.log(arg);
+      this.servicedata = arg
     });
     
   }
