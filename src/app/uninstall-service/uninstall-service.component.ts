@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ElectronService } from '../core/services';
+import { ListservicesComponent } from '../listservices/listservices.component';
+import { MatDialog } from '@angular/material/dialog';
+import { of } from 'rxjs/internal/observable/of';
 
 @Component({
   selector: 'app-uninstall-service',
@@ -9,15 +12,10 @@ import { ElectronService } from '../core/services';
 export class UninstallServiceComponent implements OnInit {
   servicedata: any;
 
-  constructor(private electronService: ElectronService) {
-    this.electronService.ipcRenderer.on('allInstalledServices', (event, arg) => {
-      this.servicedata = arg
-    });
-    
+  constructor(private electronService: ElectronService, private dialog: MatDialog) {    
   }
 
   ngOnInit() {
-    this.electronService.ipcRenderer.send('getAllServices');
     this.electronService.ipcRenderer.on('UninstallServiceComplete', (event, arg) => {
       console.log(arg);
     });
@@ -36,6 +34,21 @@ export class UninstallServiceComponent implements OnInit {
     // if a listener has been set, then the main process
     // will react to the request !
     this.electronService.ipcRenderer.send('UninstallService', Data);
+  }
+
+  listServices() {
+    this.electronService.ipcRenderer.on('allInstalledServices', (event, arg) => {
+      const dialogRef = this.dialog.open(ListservicesComponent, {
+        width: '250px',
+        data: of(arg)
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed' + result);
+      });
+    });
+
+    this.electronService.ipcRenderer.send('getAllServices');
   }
 
 }

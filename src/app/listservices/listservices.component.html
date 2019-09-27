@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>All running services</h1>
+<div mat-dialog-content>
+  <div *ngIf="(servicedata | async) as items">
+    <div *ngFor="let item of items">
+      {{item.ImageName}}
+      {{item.MemUsage}}
+      {{item.PID}}
+      {{item.Session}}
+      {{item.SessionName}}
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Close</button>
+</div>

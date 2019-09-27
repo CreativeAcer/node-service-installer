@@ -3,14 +3,6 @@
       {{ 'PAGES.UNINSTALL.TITLE' | translate }}
     </h1>
     <button mat-button (click)="uninstall()" >uninstall testscript</button>
-    <div>
-      <div *ngFor="let item of servicedata">
-        {{item.ImageName}}
-        {{item.MemUsage}}
-        {{item.PID}}
-        {{item.Session}}
-        {{item.SessionName}}
-      </div>
-    </div>
+    <button mat-button (click)="listServices()" >View installed services</button>
 </div>
 
