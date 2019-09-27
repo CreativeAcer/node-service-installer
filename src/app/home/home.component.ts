@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ElectronService } from '../core/services/electron/electron.service';
 import { Subscription } from 'rxjs';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
@@ -8,13 +8,10 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   routerSub: Subscription;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private electronService: ElectronService) {
-    this.electronService.ipcRenderer.on('isAdminUserReturn', (event, arg) => {
-      console.log('isadmin: ' + arg);
-    });
     this.routerSub = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd){
         const settings: ShellSetting = {
@@ -28,7 +25,10 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.electronService.ipcRenderer.send('isAdminUser');
+  }
+
+  ngOnDestroy(){
+    this.routerSub.unsubscribe();
   }
 
 }
