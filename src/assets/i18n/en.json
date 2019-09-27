@@ -1,9 +1,14 @@
 {
   "PAGES": {
       "HOME": {
-          "TITLE": "Welcome to the application",
           "INSTALLBTN": "Install service",
           "UNINSTALLBTN": "Uninstall service"
+      },
+      "HEADER": {
+        "TITLE": "Welcome to the application"
+      },
+      "FOOTER": {
+        "TITLE": "Footer message"
       },
       "INSTALL": {
         "TITLE": "Welcome to the installation"

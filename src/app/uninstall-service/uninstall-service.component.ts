@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ElectronService } from '../core/services';
+import { ListservicesComponent } from '../listservices/listservices.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
+import { of } from 'rxjs/internal/observable/of';
 
 @Component({
   selector: 'app-uninstall-service',
@@ -7,16 +11,25 @@ import { ElectronService } from '../core/services';
   styleUrls: ['./uninstall-service.component.scss']
 })
 export class UninstallServiceComponent implements OnInit {
-  private uninstallerService: any;
+  servicedata: any;
+  installedServices: any;
+  displayedColumns: string[] = ['position', 'name', 'action'];
 
-  constructor(private electronService: ElectronService) {
-    
+  constructor(private electronService: ElectronService, private dialog: MatDialog) {
+    this.electronService.ipcRenderer.on('allInstalledServicesComplete', (event, arg) => {
+      console.log(arg);
+      this.installedServices = new MatTableDataSource(arg); 
+    });
+    this.electronService.ipcRenderer.on('allInstalledServicesError', (event, arg) => {
+      console.log(arg);
+    }); 
   }
 
   ngOnInit() {
     this.electronService.ipcRenderer.on('UninstallServiceComplete', (event, arg) => {
       console.log(arg);
     });
+    this.electronService.ipcRenderer.send('getAllInstalledServices');
   }
 
   uninstall(){
@@ -32,6 +45,34 @@ export class UninstallServiceComponent implements OnInit {
     // if a listener has been set, then the main process
     // will react to the request !
     this.electronService.ipcRenderer.send('UninstallService', Data);
+  }
+
+  uninstallchosen(scriptData: any){
+    let Data = {
+      name: scriptData.name,
+      script: scriptData.path
+    };
+
+    // Send information to the main process
+    // if a listener has been set, then the main process
+    // will react to the request !
+    this.electronService.ipcRenderer.send('UninstallService', Data);
+  
+  }
+
+  listServices() {
+    this.electronService.ipcRenderer.on('allInstalledServices', (event, arg) => {
+      const dialogRef = this.dialog.open(ListservicesComponent, {
+        width: '250px',
+        data: of(arg)
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed' + result);
+      });
+    });
+
+    this.electronService.ipcRenderer.send('getAllServices');
   }
 
 }
