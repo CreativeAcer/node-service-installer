@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ElectronService } from '../core/services';
 import { ListservicesComponent } from '../listservices/listservices.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
 import { of } from 'rxjs/internal/observable/of';
 
 @Component({
@@ -11,14 +12,24 @@ import { of } from 'rxjs/internal/observable/of';
 })
 export class UninstallServiceComponent implements OnInit {
   servicedata: any;
+  installedServices: any;
+  displayedColumns: string[] = ['position', 'name', 'action'];
 
-  constructor(private electronService: ElectronService, private dialog: MatDialog) {    
+  constructor(private electronService: ElectronService, private dialog: MatDialog) {
+    this.electronService.ipcRenderer.on('allInstalledServicesComplete', (event, arg) => {
+      console.log(arg);
+      this.installedServices = new MatTableDataSource(arg); 
+    });
+    this.electronService.ipcRenderer.on('allInstalledServicesError', (event, arg) => {
+      console.log(arg);
+    }); 
   }
 
   ngOnInit() {
     this.electronService.ipcRenderer.on('UninstallServiceComplete', (event, arg) => {
       console.log(arg);
     });
+    this.electronService.ipcRenderer.send('getAllInstalledServices');
   }
 
   uninstall(){
@@ -34,6 +45,19 @@ export class UninstallServiceComponent implements OnInit {
     // if a listener has been set, then the main process
     // will react to the request !
     this.electronService.ipcRenderer.send('UninstallService', Data);
+  }
+
+  uninstallchosen(scriptData: any){
+    let Data = {
+      name: scriptData.name,
+      script: scriptData.path
+    };
+
+    // Send information to the main process
+    // if a listener has been set, then the main process
+    // will react to the request !
+    this.electronService.ipcRenderer.send('UninstallService', Data);
+  
   }
 
   listServices() {
