@@ -9,6 +9,7 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+    data: {showHeader: true, showFooter: true, showSidebar: true},
     children: [
       {
         path: 'install',

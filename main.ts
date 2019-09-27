@@ -3,6 +3,7 @@ import * as path from 'path';
 import * as url from 'url';
 
 let NodeWindowsService = require('node-windows').Service
+let wincmd = require('node-windows');
 
 let win, serve;
 const args = process.argv.slice(1);
@@ -80,6 +81,23 @@ ipcMain.on('UninstallService', (event, arg) => {
   });
   svc.uninstall();
 });
+
+// Attach listener in the main process with the given ID
+ipcMain.on('getAllServices', (event, arg) => {
+  wincmd.list(function(svc){
+    event.sender.send('allInstalledServices', svc);
+  });
+});
+
+// Attach listener in the main process with the given ID
+ipcMain.on('isAdminUser', (event, arg) => {
+  wincmd.isAdminUser(function(isAdmin){
+    event.sender.send('isAdminUserReturn', isAdmin);
+  });
+});
+
+
+
 
 try {
 

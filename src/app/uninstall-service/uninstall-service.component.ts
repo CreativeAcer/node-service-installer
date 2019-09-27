@@ -7,13 +7,16 @@ import { ElectronService } from '../core/services';
   styleUrls: ['./uninstall-service.component.scss']
 })
 export class UninstallServiceComponent implements OnInit {
-  private uninstallerService: any;
 
   constructor(private electronService: ElectronService) {
+    this.electronService.ipcRenderer.on('allInstalledServices', (event, arg) => {
+      console.log(arg);
+    });
     
   }
 
   ngOnInit() {
+    this.electronService.ipcRenderer.send('getAllServices');
     this.electronService.ipcRenderer.on('UninstallServiceComplete', (event, arg) => {
       console.log(arg);
     });
