@@ -1,16 +1,12 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-.header {
-    width: 100%;
-    background-color: red;
-}
+.appcontainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 
-.footer {
-    width: 100%;
-    background-color: blue;
-}
-
-.bodycontainer {
-    width: 100%;
-    background-color: purple;
+    .appbody {
+        height: 100%;
+    }
+    
 }
