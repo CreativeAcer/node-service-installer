@@ -14,9 +14,9 @@
     </mat-form-field>
     <mat-form-field>
       <label>
-        <button mat-flat-button (click)="selectScript()">Select Script</button>
-        <input type="text" matInput formControlName="scriptPath">
+          <button mat-flat-button (click)="selectScript()">Select Script</button>
       </label>
+      <input type="text" matInput formControlName="scriptPath">
     </mat-form-field>
   </form>
   <button mat-stroked-button (click)="install()" [disabled]="!installForm.valid">install testscript</button>
