@@ -10,12 +10,15 @@
   align-items: center;
   justify-content: center;
 
+  background-color: #838587;
+  color: antiquewhite;
+
   // background: url(../../assets/background.jpg) no-repeat center fixed;
   // -webkit-background-size: cover; /* pour anciens Chrome et Safari */
   // background-size: cover; /* version standardisée */
 
   .title {
-    color: black;
+    color: antiquewhite;
     margin: 0;
     padding: 50px 20px;
   }
