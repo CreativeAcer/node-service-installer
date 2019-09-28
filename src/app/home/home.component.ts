@@ -8,6 +8,7 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
+
 export class HomeComponent implements OnInit, OnDestroy {
   routerSub: Subscription;
 
