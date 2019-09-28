@@ -6,8 +6,10 @@ import { HomeRoutingModule } from './home-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
-import { MatTableModule } from '@angular/material';
+import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
 import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 
@@ -23,7 +25,9 @@ import { ListservicesComponent } from '../listservices/listservices.component';
   imports: [
     CommonModule, 
     SharedModule, 
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
     HomeRoutingModule, 
     BrowserAnimationsModule, 
     MatDialogModule, 

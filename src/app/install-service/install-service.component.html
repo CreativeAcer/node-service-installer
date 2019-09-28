@@ -1,17 +1,23 @@
 <div class="container">
-    <form [formGroup]="installForm">
+  <form class="form" [formGroup]="installForm">
+    <mat-form-field>
       <label>
         Script Name:
-        <input type="text" formControlName="scriptName">
+        <input type="text" matInput formControlName="scriptName">
       </label>
+    </mat-form-field>
+    <mat-form-field>
       <label>
         Description:
-        <input type="text" formControlName="scriptDesc">
+        <input type="text" matInput formControlName="scriptDesc">
       </label>
+    </mat-form-field>
+    <mat-form-field>
       <label>
-        <button mat-button (click)="selectScript()">Select Script</button>
-        <input type="text" [disabled]="true" formControlName="scriptPath">
+        <button mat-flat-button (click)="selectScript()">Select Script</button>
+        <input type="text" matInput [disabled]="true" formControlName="scriptPath">
       </label>
-    </form>
-    <button mat-button (click)="install()" [disabled]="!installForm.valid">install testscript</button>
-  </div>
+    </mat-form-field>
+  </form>
+  <button mat-stroked-button (click)="install()" [disabled]="!installForm.valid">install testscript</button>
+</div>
