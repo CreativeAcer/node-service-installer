@@ -8,9 +8,9 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class ListservicesComponent {
 
-  constructor(public dialogRef: MatDialogRef<ListservicesComponent>,
-    @Inject(MAT_DIALOG_DATA) public servicedata: any) {
-    }
+  constructor(
+    public dialogRef: MatDialogRef<ListservicesComponent>,
+    @Inject(MAT_DIALOG_DATA) public servicedata: any) {}
 
   onNoClick(): void {
     this.dialogRef.close();
