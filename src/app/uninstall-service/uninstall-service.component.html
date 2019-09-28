@@ -1,7 +1,4 @@
 <div class="container">
-    <h1 class="title">
-      {{ 'PAGES.UNINSTALL.TITLE' | translate }}
-    </h1>
     <button mat-button (click)="uninstall()" >uninstall testscript</button>
     <button mat-button (click)="listServices()" >View installed services</button>
     <table mat-table *ngIf="installedServices" [dataSource]="installedServices" class="mat-elevation-z8">
