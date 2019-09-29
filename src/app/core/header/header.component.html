@@ -1,4 +1,8 @@
-<h1 class="title">
-    {{ 'PAGES.HEADER.TITLE' | translate }}
-</h1>
-<button mat-button (click)="isAdmin()">check if admin</button>
+<div class="headercontainer">
+    <h1 class="title">
+        {{ 'PAGES.HEADER.TITLE' | translate }}
+    </h1>
+    <button mat-button (click)="isAdmin()">check if admin</button>
+
+    <button mat-button [routerLink]="['home']"><mat-icon aria-hidden="false" aria-label="home icon">home</mat-icon></button>
+</div>

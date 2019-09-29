@@ -8,10 +8,12 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
+
 export class HomeComponent implements OnInit, OnDestroy {
   routerSub: Subscription;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private electronService: ElectronService) {
+    this.electronService.startLoading();
     this.routerSub = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd){
         const settings: ShellSetting = {
@@ -25,6 +27,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.electronService.stopLoading();
   }
 
   ngOnDestroy(){

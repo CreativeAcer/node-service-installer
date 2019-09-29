@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ElectronService } from '../services/electron/electron.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +9,7 @@ import { ElectronService } from '../services/electron/electron.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private electronService: ElectronService) {
+  constructor(private router: Router, private electronService: ElectronService) {
   }
 
   ngOnInit() {

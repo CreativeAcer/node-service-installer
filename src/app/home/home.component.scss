@@ -1,18 +1,31 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+:host(app-home) { 
+  height: 100%;
+  width: 100%;
+}
+
 .container {
   height: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+
+  background-color: #838587;
+  color: antiquewhite;
 
   // background: url(../../assets/background.jpg) no-repeat center fixed;
   // -webkit-background-size: cover; /* pour anciens Chrome et Safari */
   // background-size: cover; /* version standardisée */
 
   .title {
-    color: black;
+    color: antiquewhite;
     margin: 0;
     padding: 50px 20px;
+  }
+
+  .mainbuttons {
+    margin: 25px;
+    border-bottom: 1px solid greenyellow;
   }
 }

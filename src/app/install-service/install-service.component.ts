@@ -30,7 +30,6 @@ export class InstallServiceComponent implements OnInit {
   }
 
   selectScript() {
-// this.windowsservice.install('testService', 'service pure for testing',  'D:\\dev\\GitHub\\ServiceInstaller\\src\\assets\\HelloWorld.js');
     // Some data that will be sent to the main process
     this.electronService.remote.dialog.showOpenDialog(this.electronService.remote.getCurrentWindow(), {
       filters: [{
@@ -57,7 +56,6 @@ export class InstallServiceComponent implements OnInit {
       script: this.installForm.get('scriptPath').value
     };
 
-    // demo script 'D:\\dev\\GitHub\\ServiceInstaller\\src\\assets\\HelloWorld.js'
     // Send information to the main process
     // if a listener has been set, then the main process
     // will react to the request !

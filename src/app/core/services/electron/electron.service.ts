@@ -13,6 +13,8 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 export class ElectronService {
   private shellSettingSubject = new Subject<ShellSetting>();
+  private _loading: boolean = false;
+  loadingStatus = new Subject<any>();
   ipcRenderer: typeof ipcRenderer;
   webFrame: typeof webFrame;
   remote: typeof remote;
@@ -47,6 +49,30 @@ export class ElectronService {
   }
   /**
    * END SHELLSETTINGS
+   */
+
+   /**
+   * LOADING SETTINGS
+   */
+  get loading():boolean {
+    return this._loading;
+  }
+
+  set loading(value) {
+    this._loading = value;
+    this.loadingStatus.next(value);
+  }
+
+  startLoading() {
+    this.loading = true;
+  }
+
+  stopLoading() {
+    this.loading = false;
+  }
+
+  /**
+   * END LOADING SETTINGS
    */
 
 }

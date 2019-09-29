@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ElectronService } from '../core/services';
 
 @Component({
   selector: 'app-listservices',
@@ -8,8 +9,10 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class ListservicesComponent {
 
-  constructor(public dialogRef: MatDialogRef<ListservicesComponent>,
+  constructor(private electronService: ElectronService,
+    public dialogRef: MatDialogRef<ListservicesComponent>,
     @Inject(MAT_DIALOG_DATA) public servicedata: any) {
+      this.electronService.stopLoading();
     }
 
   onNoClick(): void {

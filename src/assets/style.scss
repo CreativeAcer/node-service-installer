@@ -1,0 +1,11 @@
+
+// variables.scss
+$dark-color: #402f2b;
+$light-color: #e6d5c3;
+$green-outline: greenyellow;
+
+:export {
+  whitecolor: $white-color;
+  darkcolor: $dark-color;
+  greencolor: $light-color;
+}
