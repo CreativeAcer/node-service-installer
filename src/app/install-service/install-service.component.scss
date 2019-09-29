@@ -1,3 +1,7 @@
+:host(app-install-service) {
+    width: 80%;
+  }
+
 .form {
     display: flex;
     flex-direction: column;
@@ -9,4 +13,10 @@
 
 .mat-stroked-button{
     border: 1px solid greenyellow;
+}
+
+.actionBtn {
+    > button {
+        margin: 10px;
+    }
 }
