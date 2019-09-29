@@ -77,6 +77,7 @@ export class UninstallServiceComponent implements OnInit {
 
 }
 
+
 /**
  * EXAMPLE UNINSTALL
 var Service = require('node-windows').Service;
