@@ -14,6 +14,13 @@ Currently runs with:
 
 /!\ Angular 8.0 CLI needs Node 10.9 or later to work.
 
+## Implemented projects
+This project is based on the following projects  
+  Core application  
+    - [node-windows](https://github.com/coreybutler/node-windows)  
+  Framework setup  
+    - [angular-electron](https://github.com/maximegris/angular-electron)  
+    
 ## Getting Started
 
 Clone this repository locally :
