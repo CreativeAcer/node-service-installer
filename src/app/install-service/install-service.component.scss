@@ -5,6 +5,10 @@
 .form {
     display: flex;
     flex-direction: column;
+
+    label {
+        color: greenyellow;
+    }
 }
 
 .form > * {

@@ -8,9 +8,15 @@
     color: antiquewhite;
 
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+
+    .buttoncontainer {
+        align-content: flex-end;
+        margin-right: 5px;
+    }
 
     .title {
         color: antiquewhite;
+        margin-left: 5%;
     }
 }

@@ -8,13 +8,15 @@
         "TITLE": "Welcome to the application"
       },
       "FOOTER": {
-        "TITLE": "Footer message"
+        "TITLE": "Windows Node Service installer"
       },
       "INSTALL": {
         "TITLE": "Welcome to the installation"
       },
       "UNINSTALL": {
-        "TITLE": "Welcome to the uninstallation"
+        "TITLE": "Welcome to the uninstallation",
+        "LEFTTITLE": "ServiceInstaller Installed services",
+        "RIGHTTITLE": "All installed Windows services"
       }
   }
 }

@@ -6,6 +6,10 @@
     height: 100%;
     display: block;
   }
+
+  li {
+    list-style-type: none;
+  }
   
   .loading-screen-icon {
     position: absolute;

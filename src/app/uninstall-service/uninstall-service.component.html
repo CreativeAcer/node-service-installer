@@ -1,7 +1,7 @@
 <div class="container">
-    <button mat-flat-button (click)="listServices()" >View running services</button>
     <div class="bodymain" >
       <div class="left">
+        <h4> {{ 'PAGES.UNINSTALL.LEFTTITLE' | translate }} </h4>
         <table mat-table [dataSource]="installedServices" class="mat-elevation-z8">
 
           <!--- Note that these columns can be defined in any order.
@@ -30,6 +30,60 @@
         </table>
       </div>
       <div class="right">
+        <div class="rightTitleContainer">
+          <h4> {{ 'PAGES.UNINSTALL.RIGHTTITLE' | translate }}</h4>
+          <button mat-flat-button (click)="listServices()" >View running services</button>
+        </div>
+          <!-- <div class="serviceResultContainer">
+              <div *ngIf="(servicedata | async) as items" role="list">
+                  <div role="listitem" *ngFor="let item of items">
+                    <label>Name:</label> {{item.ImageName}} - 
+                    <label>MemUsage:</label> {{item.MemUsage}} - 
+                    <label>PID:</label> {{item.PID}} - 
+                    <label>Session:</label> {{item.Session}} - 
+                    <label>SessionName:</label> {{item.SessionName}}
+                    </div>
+                  </div>
+          </div> -->
+          <table mat-table [dataSource]="installedWindowsServices" class="mat-elevation-z8">
+
+              <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+            
+              <!-- Position Column -->
+              <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let i = index">{{i}}</td>
+              </ng-container>
+            
+              <!-- Name Column -->
+              <ng-container matColumnDef="ImageName">
+                <th mat-header-cell *matHeaderCellDef> Scriptname </th>
+                <td mat-cell id="namecolumn" *matCellDef="let element"> {{element.ImageName}} </td>
+              </ng-container>
+            
+              <!-- Mem Usage Column -->
+              <ng-container matColumnDef="MemUsage">
+                <th mat-header-cell *matHeaderCellDef> Memory Usage </th>
+                <td mat-cell *matCellDef="let element">{{element.MemUsage}}</td>
+              </ng-container>
+
+              <!-- PID Column -->
+              <ng-container matColumnDef="PID">
+                <th mat-header-cell *matHeaderCellDef> Process ID </th>
+                <td mat-cell *matCellDef="let element">{{element.PID}}</td>
+              </ng-container>
+              
+              <!-- SessionName Column -->
+              <ng-container matColumnDef="SessionName">
+                <th mat-header-cell *matHeaderCellDef> Session Name </th>
+                <td mat-cell *matCellDef="let element">{{element.SessionName}}</td>
+              </ng-container>
+            
+              <tr mat-header-row *matHeaderRowDef="displayedWindowsColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedWindowsColumns;"></tr>
+            </table>
+            <mat-paginator [pageSize]="9" showFirstLastButtons></mat-paginator>
       </div>
     </div>
 </div>

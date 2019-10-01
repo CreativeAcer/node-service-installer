@@ -4,6 +4,19 @@
 
 Gui for installing node service in windows. After install you will be able to monitor these servcies as any windows service.
 
+## Installing
+
+Enter name and Description  
+Select a script and click Install  
+
+![Install](images/Install.png)
+
+## Uninstalling
+
+Click uninstall next to the script you want to uninstall or in case of windows service terminate ( to be implemented )
+
+![Uninstall](images/uninstall.png)
+
 ### Under development
 
 Currently runs with:
