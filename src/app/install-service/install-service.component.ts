@@ -23,9 +23,11 @@ export class InstallServiceComponent implements OnInit {
   ngOnInit() {
     this.electronService.ipcRenderer.on('InstallServiceComplete', (event, arg) => {
       console.log(arg); 
+      this.electronService.stopLoading();
     });
     this.electronService.ipcRenderer.on('InstallServiceError', (event, arg) => {
       console.log(arg); 
+      this.electronService.stopLoading();
     });
   }
 
@@ -50,6 +52,7 @@ export class InstallServiceComponent implements OnInit {
   }
 
   install(){
+    this.electronService.startLoading();
     let Data = {
       name: this.installForm.get('scriptName').value,
       description: this.installForm.get('scriptDesc').value,
