@@ -9,7 +9,7 @@ Gui for installing node service in windows. After install you will be able to mo
 Enter name and Description  
 Select a script and click Install  
 
-![Install](images/install.png)
+![Install](images/Install.png)
 
 ## Uninstalling
 
