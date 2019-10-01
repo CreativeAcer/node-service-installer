@@ -12,6 +12,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 import { HomeComponent } from './home.component';
 import { SharedModule } from '../shared/shared.module';
@@ -29,7 +30,8 @@ import { ListservicesComponent } from '../listservices/listservices.component';
     MatFormFieldModule,
     MatInputModule,
     HomeRoutingModule, 
-    BrowserAnimationsModule, 
+    BrowserAnimationsModule,
+    MatPaginatorModule,
     MatDialogModule, 
     MatButtonModule, 
     MatTableModule, 

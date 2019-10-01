@@ -1,9 +1,10 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
 import { ElectronService } from '../core/services';
 import { ListservicesComponent } from '../listservices/listservices.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { of } from 'rxjs/internal/observable/of';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-uninstall-service',
@@ -12,8 +13,10 @@ import { of } from 'rxjs/internal/observable/of';
 })
 export class UninstallServiceComponent implements OnInit {
   servicedata: any;
+  installedWindowsServices: MatTableDataSource<WindowsServiceModel>;
   installedServices: MatTableDataSource<ServiceModel>;
   displayedColumns: string[] = ['position', 'name', 'action'];
+  displayedWindowsColumns: string[] = ['position', 'ImageName', 'MemUsage', 'PID', 'SessionName'];
 
   constructor(private electronService: ElectronService, private dialog: MatDialog, private zone: NgZone) {
     this.electronService.ipcRenderer.on('allInstalledServicesComplete', (event, arg: ServiceModel[]) => {
@@ -28,6 +31,8 @@ export class UninstallServiceComponent implements OnInit {
       console.log(arg);
     }); 
   }
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   ngOnInit() {
     this.electronService.ipcRenderer.on('UninstallServiceComplete', (event, arg) => {
@@ -68,13 +73,17 @@ export class UninstallServiceComponent implements OnInit {
     this.electronService.startLoading();
     this.electronService.ipcRenderer.on('allInstalledServices', (event, arg) => {
       this.zone.run(() => {
-        const dialogRef = this.dialog.open(ListservicesComponent, {
-          data: of(arg)
-        });
+        //this.servicedata = of(arg);
+        this.installedWindowsServices = new MatTableDataSource<WindowsServiceModel>(arg);
+        this.installedWindowsServices.paginator = this.paginator;
+        this.electronService.stopLoading();
+        // const dialogRef = this.dialog.open(ListservicesComponent, {
+        //   data: of(arg)
+        // });
     
-        dialogRef.afterClosed().subscribe(result => {
-          console.log('The dialog was closed' + result);
-        });
+        // dialogRef.afterClosed().subscribe(result => {
+        //   console.log('The dialog was closed' + result);
+        // });
       });
     });
 

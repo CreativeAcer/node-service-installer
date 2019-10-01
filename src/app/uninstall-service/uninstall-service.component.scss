@@ -11,6 +11,16 @@
     height: 100%;
 }
 
+.serviceResultContainer {
+    width: 100%;
+    max-height: 80%;
+    overflow: auto;
+
+    label {
+        color: greenyellow;
+    }
+}
+
 .bodymain {
     height: 100%;
     display: flex;
@@ -24,6 +34,11 @@
     width: 45%;
 
     table {
+
+        th {
+            color: greenyellow;
+        }
+
         width: 100%;
     }
 }
@@ -31,4 +46,25 @@
 .right {
     height: 100%;
     width: 45%;
+
+    .rightTitleContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .mat-flat-button {
+            margin: 10px;
+        }
+    }
+
+    table {
+
+        th {
+            color: greenyellow;
+        }
+        width: 100%;
+        max-width: 100%;
+        padding: 1px;
+
+    }
 }
