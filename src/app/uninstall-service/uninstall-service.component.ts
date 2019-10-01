@@ -67,12 +67,14 @@ export class UninstallServiceComponent implements OnInit {
   listServices() {
     this.electronService.startLoading();
     this.electronService.ipcRenderer.on('allInstalledServices', (event, arg) => {
-      const dialogRef = this.dialog.open(ListservicesComponent, {
-        data: of(arg)
-      });
-  
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed' + result);
+      this.zone.run(() => {
+        const dialogRef = this.dialog.open(ListservicesComponent, {
+          data: of(arg)
+        });
+    
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed' + result);
+        });
       });
     });
 
