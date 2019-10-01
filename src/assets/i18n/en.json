@@ -14,7 +14,9 @@
         "TITLE": "Welcome to the installation"
       },
       "UNINSTALL": {
-        "TITLE": "Welcome to the uninstallation"
+        "TITLE": "Welcome to the uninstallation",
+        "LEFTTITLE": "ServiceInstaller Installed services",
+        "RIGHTTITLE": "All installed Windows services"
       }
   }
 }

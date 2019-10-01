@@ -1,21 +1,34 @@
 :host(app-uninstall-service) {
     width: 100%;
+    height: 100%;
 }
 
 .mat-stroked-button{
     border: 1px solid greenyellow;
 }
 
+.container {
+    height: 100%;
+}
+
 .bodymain {
+    height: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-around;
 }
 
 .left {
+    height: 100%;
     width: 45%;
+
+    table {
+        width: 100%;
+    }
 }
 
 .right {
+    height: 100%;
     width: 45%;
 }

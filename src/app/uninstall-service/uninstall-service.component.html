@@ -1,7 +1,7 @@
 <div class="container">
-    <button mat-flat-button (click)="listServices()" >View running services</button>
     <div class="bodymain" >
       <div class="left">
+        <h4> {{ 'PAGES.UNINSTALL.LEFTTITLE' | translate }} </h4>
         <table mat-table [dataSource]="installedServices" class="mat-elevation-z8">
 
           <!--- Note that these columns can be defined in any order.
@@ -30,6 +30,8 @@
         </table>
       </div>
       <div class="right">
+          <h4> {{ 'PAGES.UNINSTALL.RIGHTTITLE' | translate }} </h4>
+          <button mat-flat-button (click)="listServices()" >View running services</button>
       </div>
     </div>
 </div>

@@ -12,13 +12,14 @@ import { of } from 'rxjs/internal/observable/of';
 })
 export class UninstallServiceComponent implements OnInit {
   servicedata: any;
-  installedServices: any;
+  installedServices: MatTableDataSource<ServiceModel>;
   displayedColumns: string[] = ['position', 'name', 'action'];
 
   constructor(private electronService: ElectronService, private dialog: MatDialog) {
-    this.electronService.ipcRenderer.on('allInstalledServicesComplete', (event, arg) => {
+    this.electronService.ipcRenderer.on('allInstalledServicesComplete', (event, arg: ServiceModel[]) => {
       console.log(arg);
-      this.installedServices = new MatTableDataSource(arg); 
+      this.installedServices = new MatTableDataSource<ServiceModel>(arg);
+      this.installedServices._updateChangeSubscription();
     });
     this.electronService.ipcRenderer.on('allInstalledServicesError', (event, arg) => {
       console.log(arg);
