@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { ElectronService } from '../core/services';
 import { ListservicesComponent } from '../listservices/listservices.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -15,11 +15,14 @@ export class UninstallServiceComponent implements OnInit {
   installedServices: MatTableDataSource<ServiceModel>;
   displayedColumns: string[] = ['position', 'name', 'action'];
 
-  constructor(private electronService: ElectronService, private dialog: MatDialog) {
+  constructor(private electronService: ElectronService, private dialog: MatDialog, private zone: NgZone) {
     this.electronService.ipcRenderer.on('allInstalledServicesComplete', (event, arg: ServiceModel[]) => {
       console.log(arg);
-      this.installedServices = new MatTableDataSource<ServiceModel>(arg);
-      this.installedServices._updateChangeSubscription();
+      this.zone.run(() => {
+        this.installedServices = new MatTableDataSource<ServiceModel>(arg);
+      });
+      
+      // this.installedServices._updateChangeSubscription();
     });
     this.electronService.ipcRenderer.on('allInstalledServicesError', (event, arg) => {
       console.log(arg);
