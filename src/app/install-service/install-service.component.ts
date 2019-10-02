@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { ElectronService } from '../core/services';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -16,7 +16,7 @@ export class InstallServiceComponent implements OnInit {
     scriptPath: new FormControl({value:'', disabled: true}, Validators.required),
   });
 
-  constructor(private electronService: ElectronService) {
+  constructor(private electronService: ElectronService, private zone: NgZone) {
     
   }
 
@@ -26,9 +26,21 @@ export class InstallServiceComponent implements OnInit {
       this.electronService.stopLoading();
     });
     this.electronService.ipcRenderer.on('InstallServiceError', (event, arg) => {
-      console.log(arg); 
+      console.log(arg);
+      this.zone.run(() => {
+        this.resetForm();
+      });
       this.electronService.stopLoading();
     });
+  }
+
+  resetForm() {
+    this.installForm.reset();
+    // this.installForm.setValue({
+    //   scriptName: '',
+    //   scriptDesc: '',
+    //   scriptPath: ''
+    // });
   }
 
   selectScript() {

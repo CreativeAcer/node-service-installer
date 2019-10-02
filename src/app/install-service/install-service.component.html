@@ -21,6 +21,7 @@
   </form>
   <div class="actionBtn">
     <button mat-flat-button (click)="selectScript()">Select Script</button>
-    <button mat-stroked-button (click)="install()" [disabled]="!installForm.valid">install</button>  
+    <button mat-stroked-button (click)="install()" [disabled]="!installForm.valid">install</button> 
+    <button mat-button (click)="resetForm()">reset</button> 
   </div>
 </div>

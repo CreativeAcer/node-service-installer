@@ -19,44 +19,32 @@ export class UninstallServiceComponent implements OnInit {
   displayedWindowsColumns: string[] = ['position', 'ImageName', 'MemUsage', 'PID', 'SessionName'];
 
   constructor(private electronService: ElectronService, private dialog: MatDialog, private zone: NgZone) {
-    this.electronService.ipcRenderer.on('allInstalledServicesComplete', (event, arg: ServiceModel[]) => {
-      console.log(arg);
-      this.zone.run(() => {
-        this.installedServices = new MatTableDataSource<ServiceModel>(arg);
-      });
-      
-      // this.installedServices._updateChangeSubscription();
-    });
-    this.electronService.ipcRenderer.on('allInstalledServicesError', (event, arg) => {
-      console.log(arg);
-    }); 
   }
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   ngOnInit() {
+    this.electronService.ipcRenderer.on('allInstalledServicesComplete', (event, arg: ServiceModel[]) => {
+      console.log(arg);
+      this.zone.run(() => {
+        this.installedServices = new MatTableDataSource<ServiceModel>(arg);
+      });
+      this.electronService.stopLoading();
+      // this.installedServices._updateChangeSubscription();
+    });
+    this.electronService.ipcRenderer.on('allInstalledServicesError', (event, arg) => {
+      console.log(arg);
+    }); 
     this.electronService.ipcRenderer.on('UninstallServiceComplete', (event, arg) => {
       console.log(arg);
+      this.electronService.ipcRenderer.send('getAllInstalledServices');
     });
     this.electronService.ipcRenderer.send('getAllInstalledServices');
   }
 
-  uninstall(){
-    // this.windowsservice.uninstall('testService', 'service pure for testing',  'D:\\dev\\GitHub\\ServiceInstaller\\src\\assets\\HelloWorld.js');
-    // Some data that will be sent to the main process
-    let Data = {
-      name: 'testService',
-      description: 'service pure for testing',
-      script: 'D:\\dev\\GitHub\\ServiceInstaller\\src\\assets\\HelloWorld.js'
-    };
-
-    // Send information to the main process
-    // if a listener has been set, then the main process
-    // will react to the request !
-    this.electronService.ipcRenderer.send('UninstallService', Data);
-  }
 
   uninstallchosen(scriptData: any){
+    this.electronService.startLoading();
     let Data = {
       name: scriptData.name,
       script: scriptData.path
