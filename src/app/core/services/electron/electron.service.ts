@@ -64,10 +64,12 @@ export class ElectronService {
   }
 
   startLoading() {
+    console.log("start loading screen");
     this.loading = true;
   }
 
   stopLoading() {
+    console.log("stop loading screen");
     this.loading = false;
   }
 

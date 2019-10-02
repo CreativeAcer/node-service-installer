@@ -42,23 +42,9 @@ export class UninstallServiceComponent implements OnInit {
     this.electronService.ipcRenderer.send('getAllInstalledServices');
   }
 
-  uninstall(){
-    this.electronService.startLoading();
-    // this.windowsservice.uninstall('testService', 'service pure for testing',  'D:\\dev\\GitHub\\ServiceInstaller\\src\\assets\\HelloWorld.js');
-    // Some data that will be sent to the main process
-    let Data = {
-      name: 'testService',
-      description: 'service pure for testing',
-      script: 'D:\\dev\\GitHub\\ServiceInstaller\\src\\assets\\HelloWorld.js'
-    };
-
-    // Send information to the main process
-    // if a listener has been set, then the main process
-    // will react to the request !
-    this.electronService.ipcRenderer.send('UninstallService', Data);
-  }
 
   uninstallchosen(scriptData: any){
+    this.electronService.startLoading();
     let Data = {
       name: scriptData.name,
       script: scriptData.path
