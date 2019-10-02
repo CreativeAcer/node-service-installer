@@ -27,5 +27,10 @@
   .mainbuttons {
     margin: 25px;
     border-bottom: 1px solid greenyellow;
+
+    .active-link {
+      border-bottom: 2px solid greenyellow;
+    }
+
   }
 }
