@@ -17,8 +17,6 @@ Click uninstall next to the script you want to uninstall or in case of windows s
 
 ![Uninstall](images/uninstall.png)
 
-### Under development
-
 Currently runs with:
 
 - Angular v8.1.3
@@ -84,5 +82,4 @@ Maybe you want to execute the application in the browser with hot reload ? You c
 **Note that you can't use Electron or NodeJS native libraries in this case.** Please check `providers/electron.service.ts` to watch how conditional import of electron/Native libraries is done.
 
 ## Branch & Packages version
-
-Currently under development, changes are frequently made
+First version 1.0.0
