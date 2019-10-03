@@ -17,7 +17,6 @@ Click uninstall next to the script you want to uninstall or in case of windows s
 
 ![Uninstall](images/uninstall.png)
 
-### Under development
 
 Currently runs with:
 
@@ -85,4 +84,4 @@ Maybe you want to execute the application in the browser with hot reload ? You c
 
 ## Branch & Packages version
 
-Currently under development, changes are frequently made
+First version 1.0.0
