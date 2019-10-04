@@ -11,6 +11,38 @@ Select a script and click Install
 
 ![Install](images/Install.png)
 
+Optional:  
+  
+Add Environment variables to your script.  
+**enable** 'Add environment variables' function  
+Enter name and value  
+
+value can be a node proces.env, to activate this option check the process.env checkbox  
+**click** add option  
+You can add multiple environment variables at once.  
+
+- Process.env value  
+name: NODE_ENV  
+**check process.env checkbox**  
+value: USERPROFILE  
+  
+- Normal Value:  
+name: NODE_ENV  
+value: production      
+  
+will result in:  
+-ex
+```
+env: [{
+   name: "HOME",
+   value: process.env["USERPROFILE"] // Access the user home directory
+ },{
+   name: "NODE_ENV",
+   value: "production"
+ }]
+```
+
+
 ## Uninstalling
 
 Click uninstall next to the script you want to uninstall or in case of windows service terminate ( to be implemented )
