@@ -13,6 +13,8 @@ import { MatInputModule } from '@angular/material/input';
 import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import { HomeComponent } from './home.component';
 import { SharedModule } from '../shared/shared.module';
@@ -33,7 +35,9 @@ import { ListservicesComponent } from '../listservices/listservices.component';
     BrowserAnimationsModule,
     MatPaginatorModule,
     MatDialogModule, 
-    MatButtonModule, 
+    MatButtonModule,
+    MatSlideToggleModule,
+    MatCheckboxModule,
     MatTableModule, 
     MatListModule,
     MatIconModule],

@@ -11,7 +11,8 @@
         "TITLE": "Windows Node Service installer"
       },
       "INSTALL": {
-        "TITLE": "Welcome to the installation"
+        "TITLE": "Welcome to the installation",
+        "RIGHTTITLE": "Add environment variables"
       },
       "UNINSTALL": {
         "TITLE": "Welcome to the uninstallation",
