@@ -86,8 +86,9 @@ function execInstall(arg: any, dir: any, event: any){
   let svc = new NodeWindowsService({
     name: arg.name,
     description: arg.description,
-    script: dir
-  });    
+    script: dir,
+    env: arg.env
+  });
   
   svc.on('install',function(){
     svc.start();

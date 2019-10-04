@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ElectronService } from '../core/services';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-install-service',
@@ -9,11 +11,19 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./install-service.component.scss']
 })
 export class InstallServiceComponent implements OnInit {
+  displayOptions: boolean = false;
+  isProcessVar: boolean = false;
+  envVariables: EnvironmentVariable[] = [];
   
   installForm = new FormGroup({
     scriptName: new FormControl('', Validators.required),
     scriptDesc: new FormControl('', Validators.required),
     scriptPath: new FormControl({value:'', disabled: true}, Validators.required),
+  });
+
+  envvarForm = new FormGroup({
+    name: new FormControl('', Validators.required),
+    value: new FormControl('', Validators.required)
   });
 
   constructor(private electronService: ElectronService) {
@@ -61,13 +71,37 @@ export class InstallServiceComponent implements OnInit {
     let Data = {
       name: this.installForm.get('scriptName').value,
       description: this.installForm.get('scriptDesc').value,
-      script: this.installForm.get('scriptPath').value
+      script: this.installForm.get('scriptPath').value,
+      env: this.envVariables
     };
 
     // Send information to the main process
     // if a listener has been set, then the main process
     // will react to the request !
     this.electronService.ipcRenderer.send('InstallService', Data);
+  }
+
+  onOptionSubmit(value: EnvironmentVariable){
+    if(this.isProcessVar){
+      let optionData: EnvironmentVariable = ({
+        name: value.name,
+        value: process.env[value.value]
+      });
+      this.envVariables.push(optionData);
+    }else {
+      this.envVariables.push(value);
+    }
+    
+    this.envvarForm.reset();
+  }
+
+  optionsToggle(event: MatSlideToggleChange){
+    this.displayOptions = event.checked;
+    event.checked ? null : this.envVariables = [];
+  }
+
+  processChange(event: MatCheckboxChange) {
+    this.isProcessVar = event.checked;
   }
 
 }

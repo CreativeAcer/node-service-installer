@@ -28,8 +28,8 @@ export class UninstallServiceComponent implements OnInit {
       console.log(arg);
       this.zone.run(() => {
         this.installedServices = new MatTableDataSource<ServiceModel>(arg);
+        this.electronService.stopLoading();
       });
-      this.electronService.stopLoading();
       // this.installedServices._updateChangeSubscription();
     });
     this.electronService.ipcRenderer.on('allInstalledServicesError', (event, arg) => {
