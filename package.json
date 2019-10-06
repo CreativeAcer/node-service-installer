@@ -1,11 +1,11 @@
 {
-  "name": "angular-electron",
+  "name": "serviceinstallergui",
   "version": "1.0.0",
-  "description": "Angular 8 with Electron (Typescript + SASS + Hot Reload)",
-  "homepage": "https://github.com/maximegris/angular-electron",
+  "description": "Angular 8 with Electron Node Service Installer for Windows",
+  "homepage": "https://github.com/CreativeAcer/ServiceInstallerGUI",
   "author": {
-    "name": "Maxime GRIS",
-    "email": "maxime.gris@gmail.com"
+    "name": "Marco Moris",
+    "email": "marco.moris@outlook.com"
   },
   "keywords": [
     "angular",
