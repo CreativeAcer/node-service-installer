@@ -66,13 +66,13 @@
                   <!-- Name Column -->
                   <ng-container matColumnDef="name">
                       <th mat-header-cell *matHeaderCellDef> Name </th>
-                      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                      <td mat-cell *matCellDef="let element"> {{element.name | limitTo: 15}} </td>
                     </ng-container>
                 
                   <!-- Value Column -->
                   <ng-container matColumnDef="value">
                     <th mat-header-cell *matHeaderCellDef> Value </th>
-                    <td mat-cell *matCellDef="let element"> {{element.value}} </td>
+                    <td mat-cell *matCellDef="let element"> {{element.value | limitTo: 15}} </td>
                   </ng-container>
                 
                   <!-- Action Column -->

@@ -18,7 +18,7 @@ export class UninstallServiceComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'action'];
   displayedWindowsColumns: string[] = ['position', 'ImageName', 'MemUsage', 'PID', 'SessionName'];
 
-  constructor(private electronService: ElectronService, private dialog: MatDialog, private zone: NgZone) {
+  constructor(private electronService: ElectronService, private zone: NgZone) {
   }
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;

@@ -23,9 +23,11 @@ import { InstallServiceComponent } from '../install-service/install-service.comp
 import { UninstallServiceComponent } from '../uninstall-service/uninstall-service.component';
 import { ListservicesComponent } from '../listservices/listservices.component';
 
+import {  TruncatePipe }   from '../shared/pipe/limitto';
+
 
 @NgModule({
-  declarations: [HomeComponent, InstallServiceComponent, UninstallServiceComponent, ListservicesComponent],
+  declarations: [HomeComponent, InstallServiceComponent, UninstallServiceComponent, ListservicesComponent,TruncatePipe],
   imports: [
     CommonModule, 
     SharedModule, 
