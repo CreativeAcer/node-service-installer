@@ -33,11 +33,11 @@ export class UninstallServiceComponent implements OnInit {
       // this.installedServices._updateChangeSubscription();
     });
     this.electronService.ipcRenderer.on('allInstalledServicesError', (event, arg) => {
-      console.log(arg);
+      this.electronService.sendsnackbar(arg);
     }); 
     this.electronService.ipcRenderer.on('UninstallServiceComplete', (event, arg) => {
-      console.log(arg);
       this.electronService.ipcRenderer.send('getAllInstalledServices');
+      this.electronService.sendsnackbar(arg);
     });
     this.electronService.ipcRenderer.send('getAllInstalledServices');
   }

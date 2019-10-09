@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ElectronService } from '../core/services';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { MatCheckboxChange } from '@angular/material/checkbox';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-install-service',
@@ -14,6 +16,8 @@ export class InstallServiceComponent implements OnInit {
   displayOptions: boolean = false;
   isProcessVar: boolean = false;
   envVariables: EnvironmentVariable[] = [];
+  addedOptions: MatTableDataSource<EnvironmentVariable>;
+  displayedColumns: string[] = ['position', 'name', 'value', 'action'];
   
   installForm = new FormGroup({
     scriptName: new FormControl('', Validators.required),
@@ -29,17 +33,21 @@ export class InstallServiceComponent implements OnInit {
   constructor(private electronService: ElectronService) {
     
   }
-
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   ngOnInit() {
     this.electronService.ipcRenderer.on('InstallServiceComplete', (event, arg) => {
-      console.log(arg);
       this.resetForm();
       this.electronService.stopLoading();
+      this.electronService.sendsnackbar(arg);
     });
     this.electronService.ipcRenderer.on('InstallServiceError', (event, arg) => {
-      console.log(arg);
       this.electronService.stopLoading();
+      this.electronService.sendsnackbar(arg);
     });
+    this.addedOptions = new MatTableDataSource<EnvironmentVariable>(this.envVariables);
+    if(!this.addedOptions.paginator ){
+      this.addedOptions.paginator = this.paginator;
+    }
   }
 
   resetForm() {
@@ -83,16 +91,29 @@ export class InstallServiceComponent implements OnInit {
 
   onOptionSubmit(value: EnvironmentVariable){
     if(this.isProcessVar){
-      let optionData: EnvironmentVariable = ({
-        name: value.name,
-        value: process.env[value.value]
-      });
-      this.envVariables.push(optionData);
+      if(process.env[value.value]){
+        let optionData: EnvironmentVariable = ({
+          name: value.name,
+          value: process.env[value.value]
+        });
+        this.envVariables.push(optionData);
+      }else {
+        // not a correct env variable
+        this.electronService.sendsnackbar("Please enter a valid process.env variable!");
+      }
+      
+      
     }else {
       this.envVariables.push(value);
     }
-    
+
+    this.addedOptions.data = this.envVariables;
     this.envvarForm.reset();
+  }
+
+  deleteoption(itemIndex: number){
+    this.envVariables.splice(itemIndex, 1);
+    this.addedOptions.data = this.envVariables;
   }
 
   optionsToggle(event: MatSlideToggleChange){

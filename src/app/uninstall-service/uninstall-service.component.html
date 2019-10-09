@@ -34,17 +34,6 @@
           <h4> {{ 'PAGES.UNINSTALL.RIGHTTITLE' | translate }}</h4>
           <button mat-flat-button (click)="listServices()" >View running services</button>
         </div>
-          <!-- <div class="serviceResultContainer">
-              <div *ngIf="(servicedata | async) as items" role="list">
-                  <div role="listitem" *ngFor="let item of items">
-                    <label>Name:</label> {{item.ImageName}} - 
-                    <label>MemUsage:</label> {{item.MemUsage}} - 
-                    <label>PID:</label> {{item.PID}} - 
-                    <label>Session:</label> {{item.Session}} - 
-                    <label>SessionName:</label> {{item.SessionName}}
-                    </div>
-                  </div>
-          </div> -->
           <table mat-table [dataSource]="installedWindowsServices" class="mat-elevation-z8">
 
               <!--- Note that these columns can be defined in any order.

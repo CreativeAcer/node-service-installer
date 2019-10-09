@@ -15,6 +15,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { HomeComponent } from './home.component';
 import { SharedModule } from '../shared/shared.module';
@@ -40,7 +41,8 @@ import { ListservicesComponent } from '../listservices/listservices.component';
     MatCheckboxModule,
     MatTableModule, 
     MatListModule,
-    MatIconModule],
+    MatIconModule,
+    MatSnackBarModule],
   entryComponents: [ListservicesComponent]
 })
 export class HomeModule {}

@@ -55,6 +55,23 @@
     .form > * {
         width: 100%;
     }
+
+    .rightbottom {
+
+        color: antiquewhite;
+        word-wrap: break-word;
+
+        table {
+
+            th {
+                color: greenyellow;
+            }
+            width: 100%;
+            max-width: 100%;
+            padding: 1px;
+    
+        }
+    }
 }
 
 
