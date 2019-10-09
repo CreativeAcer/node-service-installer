@@ -13,6 +13,7 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class UninstallServiceComponent implements OnInit {
   servicedata: any;
+  installedServicesFound: boolean = false;
   installedWindowsServices: MatTableDataSource<WindowsServiceModel>;
   installedServices: MatTableDataSource<ServiceModel>;
   displayedColumns: string[] = ['position', 'name', 'action'];
@@ -21,13 +22,16 @@ export class UninstallServiceComponent implements OnInit {
   constructor(private electronService: ElectronService, private zone: NgZone) {
   }
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild('windowsPaginator', {static: true}) windowsPaginator: MatPaginator;
+  @ViewChild('installedPaginator', {static: true}) installedPaginator: MatPaginator;
 
   ngOnInit() {
     this.electronService.ipcRenderer.on('allInstalledServicesComplete', (event, arg: ServiceModel[]) => {
       console.log(arg);
       this.zone.run(() => {
         this.installedServices = new MatTableDataSource<ServiceModel>(arg);
+        this.installedServices.paginator = this.installedPaginator;
+        this.installedServicesFound = this.installedServices.data.length > 0;
         this.electronService.stopLoading();
       });
       // this.installedServices._updateChangeSubscription();
@@ -63,7 +67,7 @@ export class UninstallServiceComponent implements OnInit {
       this.zone.run(() => {
         //this.servicedata = of(arg);
         this.installedWindowsServices = new MatTableDataSource<WindowsServiceModel>(arg);
-        this.installedWindowsServices.paginator = this.paginator;
+        this.installedWindowsServices.paginator = this.windowsPaginator;
         this.electronService.stopLoading();
         // const dialogRef = this.dialog.open(ListservicesComponent, {
         //   data: of(arg)
