@@ -18,6 +18,7 @@
       "UNINSTALL": {
         "TITLE": "Welcome to the uninstallation",
         "LEFTTITLE": "ServiceInstaller Installed services",
+        "LEFTEMPTY": "No services have been installed yet",
         "RIGHTTITLE": "All installed Windows services"
       }
   }

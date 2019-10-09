@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { ElectronService } from '../services/electron/electron.service';
 
 @Component({
@@ -9,9 +9,11 @@ import { ElectronService } from '../services/electron/electron.service';
 export class FooterComponent implements OnInit {
   appVersion: string;
 
-  constructor(private electronService: ElectronService) {
+  constructor(private electronService: ElectronService, private zone: NgZone) {
     this.electronService.ipcRenderer.on('appVersion', (event, arg) => {
-      this.appVersion = arg;
+      this.zone.run(() => {
+        this.appVersion = arg;
+      });
     });
   }
 

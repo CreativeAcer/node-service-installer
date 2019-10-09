@@ -2,32 +2,38 @@
     <div class="bodymain" >
       <div class="left">
         <h4> {{ 'PAGES.UNINSTALL.LEFTTITLE' | translate }} </h4>
-        <table mat-table [dataSource]="installedServices" class="mat-elevation-z8">
+        <div [hidden]="!installedServicesFound">
+            <table mat-table [dataSource]="installedServices" class="mat-elevation-z8">
 
-          <!--- Note that these columns can be defined in any order.
-                The actual rendered columns are set as a property on the row definition" -->
-        
-          <!-- Position Column -->
-          <ng-container matColumnDef="position">
-            <th mat-header-cell *matHeaderCellDef> No. </th>
-            <td mat-cell *matCellDef="let i = index">{{i}}</td>
-          </ng-container>
-        
-          <!-- Name Column -->
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef> Scriptname </th>
-            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-          </ng-container>
-        
-          <!-- Action Column -->
-          <ng-container matColumnDef="action">
-            <th mat-header-cell *matHeaderCellDef> Action </th>
-            <td mat-cell *matCellDef="let element"><button mat-stroked-button (click)="uninstallchosen(element)">Uninstall</button></td>
-          </ng-container>
-        
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+                <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+              
+                <!-- Position Column -->
+                <ng-container matColumnDef="position">
+                  <th mat-header-cell *matHeaderCellDef> No. </th>
+                  <td mat-cell *matCellDef="let i = index">{{i}}</td>
+                </ng-container>
+              
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef> Scriptname </th>
+                  <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
+              
+                <!-- Action Column -->
+                <ng-container matColumnDef="action">
+                  <th mat-header-cell *matHeaderCellDef> Action </th>
+                  <td mat-cell *matCellDef="let element"><button mat-stroked-button (click)="uninstallchosen(element)">Uninstall</button></td>
+                </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+              <mat-paginator [pageSize]="9" showFirstLastButtons></mat-paginator>
+        </div>
+        <div [hidden]="installedServicesFound">
+            <h5> {{ 'PAGES.UNINSTALL.LEFTEMPTY' | translate }} </h5>
+        </div>
       </div>
       <div class="right">
         <div class="rightTitleContainer">
