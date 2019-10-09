@@ -4,6 +4,13 @@
   width: 100%;
 }
 
+::ng-deep .snackbar{
+  background-color: antiquewhite;
+  color: black;
+}
+
+
+
 .container {
   height: 100%;
   display: flex;

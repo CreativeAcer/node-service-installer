@@ -15,6 +15,7 @@ export class ElectronService {
   private shellSettingSubject = new Subject<ShellSetting>();
   private _loading: boolean = false;
   loadingStatus = new Subject<any>();
+  snackbarMSG = new Subject<any>();
   ipcRenderer: typeof ipcRenderer;
   webFrame: typeof webFrame;
   remote: typeof remote;
@@ -75,6 +76,21 @@ export class ElectronService {
 
   /**
    * END LOADING SETTINGS
+   */
+
+   /**
+   * SNACKBAR SETTINGS
+   */
+  set snackbar(value) {
+    this.snackbarMSG.next(value);
+  }
+
+  sendsnackbar(value) {
+    this.snackbar = value;
+  }
+
+  /**
+   * END SNACKBAR SETTINGS
    */
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ElectronService } from '../core/services/electron/electron.service';
 import { Subscription } from 'rxjs';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home',
@@ -11,8 +12,9 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 
 export class HomeComponent implements OnInit, OnDestroy {
   routerSub: Subscription;
+  snackbarSubscription: Subscription;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private electronService: ElectronService) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private electronService: ElectronService, private _snackBar: MatSnackBar) {
     this.electronService.startLoading();
     this.routerSub = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd){
@@ -24,6 +26,9 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.electronService.setShellSettings(settings);
       }
     });
+    this.snackbarSubscription = this.electronService.snackbarMSG.subscribe((message: string) => {
+      this.openSnackBar(message);
+    });
   }
 
   ngOnInit() {
@@ -32,6 +37,15 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){
     this.routerSub.unsubscribe();
+  }
+
+  openSnackBar(message: string) {
+    this._snackBar.open(message, "Close", {
+      duration: 2000,
+      verticalPosition: 'bottom',
+      horizontalPosition: 'right',
+      panelClass: 'snackbar'
+    });
   }
 
 }

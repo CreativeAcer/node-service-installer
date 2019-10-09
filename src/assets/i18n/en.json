@@ -12,7 +12,8 @@
       },
       "INSTALL": {
         "TITLE": "Welcome to the installation",
-        "RIGHTTITLE": "Add environment variables"
+        "RIGHTTITLE": "Add environment variables",
+        "RIGHTTITLEBOTTOM": "Added options"
       },
       "UNINSTALL": {
         "TITLE": "Welcome to the uninstallation",
