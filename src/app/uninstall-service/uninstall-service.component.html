@@ -29,7 +29,7 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
               </table>
-              <mat-paginator #installedPaginator [pageSize]="9" showFirstLastButtons></mat-paginator>
+              <mat-paginator [pageSize]="9" showFirstLastButtons></mat-paginator>
         </div>
         <div [hidden]="installedServicesFound">
             <h5> {{ 'PAGES.UNINSTALL.LEFTEMPTY' | translate }} </h5>
@@ -78,7 +78,7 @@
               <tr mat-header-row *matHeaderRowDef="displayedWindowsColumns"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedWindowsColumns;"></tr>
             </table>
-            <mat-paginator #windowsPaginator [pageSize]="9" showFirstLastButtons></mat-paginator>
+            <mat-paginator [pageSize]="9" showFirstLastButtons></mat-paginator>
       </div>
     </div>
 </div>

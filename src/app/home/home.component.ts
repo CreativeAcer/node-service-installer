@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   openSnackBar(message: string) {
     this._snackBar.open(message, "Close", {
-      duration: 2000,
+      duration: 3500,
       verticalPosition: 'bottom',
       horizontalPosition: 'right',
       panelClass: 'snackbar'
