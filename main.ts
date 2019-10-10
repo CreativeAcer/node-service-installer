@@ -26,6 +26,7 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true,
     },
+    icon: path.join(__dirname, 'dist/assets/appx/favicon.png')
   });
 
   if (serve) {
