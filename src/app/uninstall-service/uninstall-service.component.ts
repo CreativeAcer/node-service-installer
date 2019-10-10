@@ -19,16 +19,11 @@ export class UninstallServiceComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['position', 'name', 'action'];
   displayedWindowsColumns: string[] = ['position', 'ImageName', 'MemUsage', 'PID', 'SessionName'];
 
-  // @ViewChild('windowsPaginator', {static: true}) windowsPaginator: MatPaginator;
-  // @ViewChild('installedPaginator', {static: true}) installedPaginator: MatPaginator;
-
   @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
 
   constructor(private electronService: ElectronService, private zone: NgZone) {
     this.installedServices = new MatTableDataSource<ServiceModel>([]);
-    // this.installedServices.paginator = this.installedPaginator;
     this.installedWindowsServices = new MatTableDataSource<WindowsServiceModel>([]);
-    // this.installedWindowsServices.paginator = this.windowsPaginator;
   }
 
   ngOnInit() {
@@ -47,7 +42,29 @@ export class UninstallServiceComponent implements OnInit, AfterViewInit {
       this.electronService.ipcRenderer.send('getAllInstalledServices');
       this.electronService.sendsnackbar(arg);
     });
+    this.electronService.ipcRenderer.on('killWindowsServiceComplete', (event, arg) => {
+      this.electronService.sendsnackbar(arg);
+      this.electronService.ipcRenderer.send('getAllServices');
+      this.electronService.startLoading();
+    });
+    this.electronService.ipcRenderer.on('killWindowsServiceError', (event, arg) => {
+      this.electronService.sendsnackbar(arg);
+    });
     this.electronService.ipcRenderer.send('getAllInstalledServices');
+    this.electronService.ipcRenderer.on('AllServicesComplete', (event, arg) => {
+      this.zone.run(() => {
+        //this.servicedata = of(arg);
+        this.installedWindowsServices.data = arg;
+        this.electronService.stopLoading();
+        // const dialogRef = this.dialog.open(ListservicesComponent, {
+        //   data: of(arg)
+        // });
+    
+        // dialogRef.afterClosed().subscribe(result => {
+        //   console.log('The dialog was closed' + result);
+        // });
+      });
+    });
   }
 
   ngAfterViewInit() {
@@ -72,22 +89,15 @@ export class UninstallServiceComponent implements OnInit, AfterViewInit {
 
   listServices() {
     this.electronService.startLoading();
-    this.electronService.ipcRenderer.on('allInstalledServices', (event, arg) => {
-      this.zone.run(() => {
-        //this.servicedata = of(arg);
-        this.installedWindowsServices.data = arg;
-        this.electronService.stopLoading();
-        // const dialogRef = this.dialog.open(ListservicesComponent, {
-        //   data: of(arg)
-        // });
-    
-        // dialogRef.afterClosed().subscribe(result => {
-        //   console.log('The dialog was closed' + result);
-        // });
-      });
-    });
-
     this.electronService.ipcRenderer.send('getAllServices');
+  }
+
+  killWindowsService(service: any){
+    let Data = {
+      pid: service.PID,
+      force: true
+    };
+    this.electronService.ipcRenderer.send('killWindowsService', Data);
   }
 
 }
