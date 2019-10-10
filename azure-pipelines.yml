@@ -1,0 +1,49 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+
+- task: Npm@1
+  displayName: 'npm install angular cli'
+  inputs:
+    command: custom
+    customCommand: install -g @angular/cli
+    workingDir: .
+- task: Npm@1
+  displayName: 'npm install dependencies'
+  inputs:
+    command: install
+    workingDir: .
+- task: Npm@1
+  displayName: 'build application'
+  inputs:
+    command: custom
+    customCommand: run electron:windows
+    workingDir: .
+
+- task: CopyFiles@2
+  displayName: 'Copy Files to: $(BuildDirectory)'
+  inputs:
+    Contents: |
+     release\**\*.exe
+    TargetFolder: '$(build.ArtifactStagingDirectory)'
+    CleanTargetFolder: true
+    OverWrite: true
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop app executable'
+    publishLocation: 'Container'
+
