@@ -3,6 +3,7 @@ import { ElectronService } from '../core/services/electron/electron.service';
 import { Subscription } from 'rxjs';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { NgZone } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   routerSub: Subscription;
   snackbarSubscription: Subscription;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private electronService: ElectronService, private _snackBar: MatSnackBar) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private electronService: ElectronService, private _snackBar: MatSnackBar, private zone: NgZone) {
     this.electronService.startLoading();
     this.routerSub = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd){
@@ -40,11 +41,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   openSnackBar(message: string) {
-    this._snackBar.open(message, "Close", {
-      duration: 3500,
-      verticalPosition: 'bottom',
-      horizontalPosition: 'right',
-      panelClass: 'snackbar'
+    this.zone.run(() => {
+      this._snackBar.open(message, 'Close', {
+        duration: 3500,
+        verticalPosition: 'bottom',
+        horizontalPosition: 'right',
+        panelClass: 'snackbar'
+      });
     });
   }
 
