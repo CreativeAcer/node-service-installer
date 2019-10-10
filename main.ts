@@ -6,6 +6,7 @@ import { AnonymousSubject } from 'rxjs/internal/Subject';
 
 let NodeWindowsService = require('node-windows').Service
 let wincmd = require('node-windows');
+var child = require('child_process');
 
 let win, serve;
 const args = process.argv.slice(1);
@@ -53,6 +54,29 @@ function createWindow() {
   });
 
 }
+
+/**
+ * KILL WINDOWS SERVICE - DANGEROUS
+ */
+ipcMain.on('killWindowsService', (event, arg) => {
+//   let command = 'net stop ' + arg.servicename;
+//   child.exec(command, function (error, stdout, stderr) {
+//     if (error !== null) {
+//         event.sender.send('killWindowsServiceError', 'exec error: ' + error);
+//     }
+//     event.sender.send('killWindowsServiceComplete', 'Windows service has been terminated!');
+//     // Validate stdout / stderr to see if service is already running
+//     // perhaps.
+//  });
+  wincmd.kill(arg.pid, arg.force ,function(err){
+    if (err) {
+      event.sender.send('killWindowsServiceError', 'exec error: ' + err);
+    } else {
+      event.sender.send('killWindowsServiceComplete', 'Windows service has been terminated!');
+    }
+  });
+
+})
 
 
 ipcMain.on('getVersion', (event, arg) => {
@@ -118,7 +142,7 @@ ipcMain.on('UninstallService', (event, arg) => {
 // Attach listener in the main process with the given ID
 ipcMain.on('getAllServices', (event, arg) => {
   wincmd.list(function(svc){
-    event.sender.send('allInstalledServices', svc);
+    event.sender.send('AllServicesComplete', svc);
   });
 });
 

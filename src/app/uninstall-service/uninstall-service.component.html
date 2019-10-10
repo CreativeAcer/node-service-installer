@@ -74,6 +74,12 @@
                 <th mat-header-cell *matHeaderCellDef> Session Name </th>
                 <td mat-cell *matCellDef="let element">{{element.SessionName}}</td>
               </ng-container>
+
+              <!-- Action Column -->
+              <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef> Action </th>
+                <td mat-cell *matCellDef="let element"><button mat-stroked-button (click)="killWindowsService(element)">Kill</button></td>
+              </ng-container>
             
               <tr mat-header-row *matHeaderRowDef="displayedWindowsColumns"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedWindowsColumns;"></tr>
