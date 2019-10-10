@@ -26,10 +26,6 @@ steps:
   inputs:
     command: install
     workingDir: .
-
-- script: |
-    $(PACKAGEVERSION)=$(node -p -e "require('./package.json').version")
-  displayName: 'set buildnumber'
 - task: Npm@1
   displayName: 'build application'
   inputs:
