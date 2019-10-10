@@ -1,4 +1,6 @@
-[![Angular Logo](https://www.vectorlogo.zone/logos/angular/angular-icon.svg)](https://angular.io/) [![Electron Logo](https://www.vectorlogo.zone/logos/electronjs/electronjs-icon.svg)](https://electronjs.org/)
+[![Angular Logo](https://www.vectorlogo.zone/logos/angular/angular-icon.svg)](https://angular.io/) [![Electron Logo](https://www.vectorlogo.zone/logos/electronjs/electronjs-icon.svg)](https://electronjs.org/)  
+  
+  [![Build Status](https://creativesuite.visualstudio.com/GitHub/_apis/build/status/CreativeAcer.ServiceInstallerGUI?branchName=master)](https://creativesuite.visualstudio.com/GitHub/_build/latest?definitionId=4&branchName=master)
 
 # Introduction
 
