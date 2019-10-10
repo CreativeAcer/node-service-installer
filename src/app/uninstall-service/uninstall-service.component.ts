@@ -17,7 +17,7 @@ export class UninstallServiceComponent implements OnInit, AfterViewInit {
   installedWindowsServices: MatTableDataSource<WindowsServiceModel>;
   installedServices: MatTableDataSource<ServiceModel>;
   displayedColumns: string[] = ['position', 'name', 'action'];
-  displayedWindowsColumns: string[] = ['position', 'ImageName', 'MemUsage', 'PID', 'SessionName'];
+  displayedWindowsColumns: string[] = ['position', 'ImageName', 'MemUsage', 'PID', 'SessionName', 'action'];
 
   @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
 
@@ -43,9 +43,9 @@ export class UninstallServiceComponent implements OnInit, AfterViewInit {
       this.electronService.sendsnackbar(arg);
     });
     this.electronService.ipcRenderer.on('killWindowsServiceComplete', (event, arg) => {
-      this.electronService.sendsnackbar(arg);
-      this.electronService.ipcRenderer.send('getAllServices');
       this.electronService.startLoading();
+      this.electronService.ipcRenderer.send('getAllServices');
+      this.electronService.sendsnackbar(arg);
     });
     this.electronService.ipcRenderer.on('killWindowsServiceError', (event, arg) => {
       this.electronService.sendsnackbar(arg);

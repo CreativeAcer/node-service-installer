@@ -54,7 +54,7 @@
               <!-- Name Column -->
               <ng-container matColumnDef="ImageName">
                 <th mat-header-cell *matHeaderCellDef> Scriptname </th>
-                <td mat-cell id="namecolumn" *matCellDef="let element"> {{element.ImageName}} </td>
+                <td mat-cell id="namecolumn" *matCellDef="let element"> {{element.ImageName | limitTo: 25}} </td>
               </ng-container>
             
               <!-- Mem Usage Column -->
