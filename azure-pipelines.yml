@@ -37,7 +37,7 @@ steps:
   displayName: 'Copy Files to: $(BuildDirectory)'
   inputs:
     Contents: |
-     release\**\*.exe
+     release\**\*
     TargetFolder: '$(build.ArtifactStagingDirectory)'
     CleanTargetFolder: true
     OverWrite: true
