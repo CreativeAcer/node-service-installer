@@ -1,7 +1,7 @@
 {
   "productName": "ServiceInstaller",
   "directories": {
-    "buildResources": "src/assests/appx",
+    "buildResources": "src/assets/appx",
     "output": "release/"
   },
     "files": [
