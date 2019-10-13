@@ -47,7 +47,7 @@ env: [{
 
 ## Uninstalling
 
-Click uninstall next to the script you want to uninstall or in case of windows service terminate ( to be implemented )
+Click uninstall next to the script you want to uninstall or in case of windows service terminate
 
 ![Uninstall](images/uninstall.png)
 
@@ -117,6 +117,4 @@ Maybe you want to execute the application in the browser with hot reload ? You c
 **Note that you can't use Electron or NodeJS native libraries in this case.** Please check `providers/electron.service.ts` to watch how conditional import of electron/Native libraries is done.
 
 ## Branch & Packages version
-First version 1.0.0
-
 First version 1.0.0
