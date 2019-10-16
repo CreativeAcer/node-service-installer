@@ -6,6 +6,7 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { EnvironmentVariable } from '../interface/IEnvVar';
 
 @Component({
   selector: 'app-install-service',

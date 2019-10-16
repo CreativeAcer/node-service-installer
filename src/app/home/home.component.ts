@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { NgZone } from '@angular/core';
+import { ShellSetting } from '../interface/IShellSetting';
 
 @Component({
   selector: 'app-home',

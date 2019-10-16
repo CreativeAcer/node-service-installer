@@ -5,6 +5,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { of } from 'rxjs/internal/observable/of';
 import { MatPaginator } from '@angular/material/paginator';
+import { ServiceModel } from '../interface/IService';
+import { WindowsServiceModel } from '../interface/IWindowsService';
 
 @Component({
   selector: 'app-uninstall-service',

@@ -1,4 +1,4 @@
-interface WindowsServiceModel {
+export interface WindowsServiceModel {
     ImageName: string
     MemUsage: string
     PID: string
