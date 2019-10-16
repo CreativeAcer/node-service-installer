@@ -22,6 +22,7 @@
   "main": "main.js",
   "private": true,
   "scripts": {
+    "mochatest": "nyc mocha",
     "postinstall": "npm run postinstall:electron && electron-builder install-app-deps",
     "postinstall:web": "node postinstall-web",
     "postinstall:electron": "node postinstall",
@@ -42,6 +43,19 @@
     "e2e": "npm run build:prod && mocha --timeout 300000 --require ts-node/register e2e/**/*.spec.ts",
     "version": "conventional-changelog -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
     "lint": "ng lint"
+  },
+  "nyc": {
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "exclude": [
+      "**/*.d.ts"
+    ],
+    "reporter": [
+      "html"
+    ],
+    "all": true  
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.802.2",
