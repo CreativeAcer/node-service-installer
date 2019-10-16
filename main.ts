@@ -4,9 +4,9 @@ import * as url from 'url';
 import * as fs from 'fs';
 import { AnonymousSubject } from 'rxjs/internal/Subject';
 
-let NodeWindowsService = require('node-windows').Service
-let wincmd = require('node-windows');
-var child = require('child_process');
+const NodeWindowsService = require('node-windows').Service;
+const wincmd = require('node-windows');
+const child = require('child_process');
 
 let win, serve;
 const args = process.argv.slice(1);
@@ -69,7 +69,7 @@ ipcMain.on('killWindowsService', (event, arg) => {
 //     // Validate stdout / stderr to see if service is already running
 //     // perhaps.
 //  });
-  wincmd.kill(arg.pid, arg.force ,function(err){
+  wincmd.kill(arg.pid, arg.force , function(err) {
     if (err) {
       event.sender.send('killWindowsServiceError', 'exec error: ' + err);
     } else {
@@ -77,12 +77,12 @@ ipcMain.on('killWindowsService', (event, arg) => {
     }
   });
 
-})
+});
 
 
 ipcMain.on('getVersion', (event, arg) => {
   event.sender.send('appVersion', app.getVersion());
-})
+});
 
 // Attach listener in the main process with the given ID
 ipcMain.on('InstallService', (event, arg) => {
@@ -91,58 +91,58 @@ ipcMain.on('InstallService', (event, arg) => {
   if (fs.existsSync(appStorageDir)) {
     // Copy script into folder for future use
     fs.copyFile(arg.script, appStorageDir + '\\' + arg.name + '.js', (err) => {
-         if (err) event.sender.send('InstallServiceError', "Could not copy file to directory: " + appStorageDir);
+         if (err) { event.sender.send('InstallServiceError', 'Could not copy file to directory: ' + appStorageDir); }
          execInstall(arg, appStorageDir + '\\' + arg.name + '.js', event);
     });
-  }else {
+  } else {
     // Create folder first
-    fs.mkdir(appStorageDir, { recursive: false }, function(err){
-      if(err){event.sender.send('InstallServiceError', "Could not create needed directory, please create folder installedScripts in the following location" +app.getPath('userData'));}
+    fs.mkdir(appStorageDir, { recursive: false }, function(err) {
+      if (err) {event.sender.send('InstallServiceError', 'Could not create needed directory, please create folder installedScripts in the following location' + app.getPath('userData')); }
       fs.copyFile(arg.script, appStorageDir + '\\' + arg.name + '.js', (err) => {
-        if (err) event.sender.send('InstallServiceError', "Could not copy file to directory: " + appStorageDir);
+        if (err) { event.sender.send('InstallServiceError', 'Could not copy file to directory: ' + appStorageDir); }
         execInstall(arg, appStorageDir + '\\' + arg.name + '.js', event);
       });
     });
   }
-  
+
 });
 
-function execInstall(arg: any, dir: any, event: any){
-  let svc = new NodeWindowsService({
+function execInstall(arg: any, dir: any, event: any) {
+  const svc = new NodeWindowsService({
     name: arg.name,
     description: arg.description,
     script: dir,
     env: arg.env
   });
-  
-  svc.on('install',function(){
+
+  svc.on('install', function() {
     svc.start();
-    event.sender.send('InstallServiceComplete', "Install complete!");
+    event.sender.send('InstallServiceComplete', 'Install complete!');
   });
-  svc.on('alreadyinstalled',function(){
-    event.sender.send('InstallServiceError', "This service is already installed!");
+  svc.on('alreadyinstalled', function() {
+    event.sender.send('InstallServiceError', 'This service is already installed!');
   });
   svc.install();
 }
 
 // Attach listener in the main process with the given ID
 ipcMain.on('UninstallService', (event, arg) => {
-  let svc = new NodeWindowsService({
+  const svc = new NodeWindowsService({
     name: arg.name,
     script: arg.script
   });
   svc._directory = app.getPath('userData') + '\\installedScripts';
-  svc.on('uninstall',function(){
+  svc.on('uninstall', function() {
     // delete copied js file
     fs.unlinkSync(arg.script);
-    event.sender.send('UninstallServiceComplete', "Uninstall complete!");
+    event.sender.send('UninstallServiceComplete', 'Uninstall complete!');
   });
   svc.uninstall();
 });
 
 // Attach listener in the main process with the given ID
 ipcMain.on('getAllServices', (event, arg) => {
-  wincmd.list(function(svc){
+  wincmd.list(function(svc) {
     event.sender.send('AllServicesComplete', svc);
   });
 });
@@ -153,18 +153,18 @@ ipcMain.on('getAllInstalledServices', (event, arg) => {
   const appStorageDir = app.getPath('userData') + '\\installedScripts';
   if (!fs.existsSync(appStorageDir)) {
     event.sender.send('allInstalledServicesError', 'No installed services');
-  } else{
+  } else {
     const dirents = fs.readdirSync(appStorageDir, { withFileTypes: true });
     const filesNames = dirents
       .filter(dirent => !dirent.isDirectory())
-      .map(dirent => { return {name: dirent.name.replace('.js', ''), path: appStorageDir+'\\'+ dirent.name} });
+      .map(dirent => ({name: dirent.name.replace('.js', ''), path: appStorageDir + '\\' + dirent.name}));
     event.sender.send('allInstalledServicesComplete', filesNames);
   }
 });
 
 // Attach listener in the main process with the given ID
 ipcMain.on('isAdminUser', (event, arg) => {
-  wincmd.isAdminUser(function(isAdmin){
+  wincmd.isAdminUser(function(isAdmin) {
     event.sender.send('isAdminUserReturn', isAdmin);
   });
 });
