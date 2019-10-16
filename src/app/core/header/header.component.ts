@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  isAdmin(){
+  isAdmin() {
     this.electronService.ipcRenderer.send('isAdminUser');
   }
 
