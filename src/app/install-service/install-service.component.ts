@@ -13,16 +13,16 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrls: ['./install-service.component.scss']
 })
 export class InstallServiceComponent implements OnInit {
-  displayOptions: boolean = false;
-  isProcessVar: boolean = false;
+  displayOptions = false;
+  isProcessVar = false;
   envVariables: EnvironmentVariable[] = [];
   addedOptions: MatTableDataSource<EnvironmentVariable>;
   displayedColumns: string[] = ['position', 'name', 'value', 'action'];
-  
+
   installForm = new FormGroup({
     scriptName: new FormControl('', Validators.required),
     scriptDesc: new FormControl('', Validators.required),
-    scriptPath: new FormControl({value:'', disabled: true}, Validators.required),
+    scriptPath: new FormControl({value: '', disabled: true}, Validators.required),
   });
 
   envvarForm = new FormGroup({
@@ -31,7 +31,7 @@ export class InstallServiceComponent implements OnInit {
   });
 
   constructor(private electronService: ElectronService) {
-    
+
   }
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   ngOnInit() {
@@ -45,7 +45,7 @@ export class InstallServiceComponent implements OnInit {
       this.electronService.sendsnackbar(arg);
     });
     this.addedOptions = new MatTableDataSource<EnvironmentVariable>(this.envVariables);
-    if(!this.addedOptions.paginator ){
+    if (!this.addedOptions.paginator ) {
       this.addedOptions.paginator = this.paginator;
     }
   }
@@ -74,9 +74,9 @@ export class InstallServiceComponent implements OnInit {
     }.bind(this));
   }
 
-  install(){
+  install() {
     this.electronService.startLoading();
-    let Data = {
+    const Data = {
       name: this.installForm.get('scriptName').value,
       description: this.installForm.get('scriptDesc').value,
       script: this.installForm.get('scriptPath').value,
@@ -89,21 +89,21 @@ export class InstallServiceComponent implements OnInit {
     this.electronService.ipcRenderer.send('InstallService', Data);
   }
 
-  onOptionSubmit(value: EnvironmentVariable){
-    if(this.isProcessVar){
-      if(process.env[value.value]){
-        let optionData: EnvironmentVariable = ({
+  onOptionSubmit(value: EnvironmentVariable) {
+    if (this.isProcessVar) {
+      if (process.env[value.value]) {
+        const optionData: EnvironmentVariable = ({
           name: value.name,
           value: process.env[value.value]
         });
         this.envVariables.push(optionData);
-      }else {
+      } else {
         // not a correct env variable
-        this.electronService.sendsnackbar("Please enter a valid process.env variable!");
+        this.electronService.sendsnackbar('Please enter a valid process.env variable!');
       }
-      
-      
-    }else {
+
+
+    } else {
       this.envVariables.push(value);
     }
 
@@ -111,12 +111,12 @@ export class InstallServiceComponent implements OnInit {
     this.envvarForm.reset();
   }
 
-  deleteoption(itemIndex: number){
+  deleteoption(itemIndex: number) {
     this.envVariables.splice(itemIndex, 1);
     this.addedOptions.data = this.envVariables;
   }
 
-  optionsToggle(event: MatSlideToggleChange){
+  optionsToggle(event: MatSlideToggleChange) {
     this.displayOptions = event.checked;
     event.checked ? null : this.envVariables = [];
   }
@@ -132,14 +132,14 @@ export class InstallServiceComponent implements OnInit {
 /*
 EXAMPLE INSTALL
 var Service = require('node-windows').Service;
- 
+
 // Create a new service object
 var svc = new Service({
   name:'Name for Service',
   description: 'Description of the service',
   script: 'D:\\path\\path\\scriptname.js'
 });
- 
+
 // Listen for the 'install' event, which indicates the
 // process is available as a service.
 svc.on('install',function(){
@@ -150,7 +150,7 @@ svc.on('install',function(){
 svc.on('alreadyinstalled',function(){
   console.log('This service is already installed.');
 });
- 
+
 // install the service
 svc.install();
 
