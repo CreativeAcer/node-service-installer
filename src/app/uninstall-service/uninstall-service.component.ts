@@ -13,7 +13,7 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class UninstallServiceComponent implements OnInit, AfterViewInit {
   servicedata: any;
-  installedServicesFound: boolean = false;
+  installedServicesFound = false;
   installedWindowsServices: MatTableDataSource<WindowsServiceModel>;
   installedServices: MatTableDataSource<ServiceModel>;
   displayedColumns: string[] = ['position', 'name', 'action'];
@@ -37,7 +37,7 @@ export class UninstallServiceComponent implements OnInit, AfterViewInit {
     });
     this.electronService.ipcRenderer.on('allInstalledServicesError', (event, arg) => {
       this.electronService.sendsnackbar(arg);
-    }); 
+    });
     this.electronService.ipcRenderer.on('UninstallServiceComplete', (event, arg) => {
       this.electronService.ipcRenderer.send('getAllInstalledServices');
       this.electronService.sendsnackbar(arg);
@@ -53,13 +53,13 @@ export class UninstallServiceComponent implements OnInit, AfterViewInit {
     this.electronService.ipcRenderer.send('getAllInstalledServices');
     this.electronService.ipcRenderer.on('AllServicesComplete', (event, arg) => {
       this.zone.run(() => {
-        //this.servicedata = of(arg);
+        // this.servicedata = of(arg);
         this.installedWindowsServices.data = arg;
         this.electronService.stopLoading();
         // const dialogRef = this.dialog.open(ListservicesComponent, {
         //   data: of(arg)
         // });
-    
+
         // dialogRef.afterClosed().subscribe(result => {
         //   console.log('The dialog was closed' + result);
         // });
@@ -73,9 +73,9 @@ export class UninstallServiceComponent implements OnInit, AfterViewInit {
   }
 
 
-  uninstallchosen(scriptData: any){
+  uninstallchosen(scriptData: any) {
     this.electronService.startLoading();
-    let Data = {
+    const Data = {
       name: scriptData.name,
       script: scriptData.path
     };
@@ -84,7 +84,7 @@ export class UninstallServiceComponent implements OnInit, AfterViewInit {
     // if a listener has been set, then the main process
     // will react to the request !
     this.electronService.ipcRenderer.send('UninstallService', Data);
-  
+
   }
 
   listServices() {
@@ -92,8 +92,8 @@ export class UninstallServiceComponent implements OnInit, AfterViewInit {
     this.electronService.ipcRenderer.send('getAllServices');
   }
 
-  killWindowsService(service: any){
-    let Data = {
+  killWindowsService(service: any) {
+    const Data = {
       pid: service.PID,
       force: true
     };
@@ -106,22 +106,22 @@ export class UninstallServiceComponent implements OnInit, AfterViewInit {
 /**
  * EXAMPLE UNINSTALL
 var Service = require('node-windows').Service;
- 
+
 // Create a new service object
 var svc = new Service({
   name:'Name for Service',
   description: 'Description of the service',
   script: 'D:\\path\\path\\scriptname.js'
 });
- 
+
 // Listen for the 'uninstall' event so we know when it is done.
 svc.on('uninstall',function(){
   console.log('Uninstall complete.');
   console.log('The service exists: ',svc.exists);
- 
+
 });
- 
+
 // Uninstall the service.
 svc.uninstall();
- * 
+ *
  */
