@@ -26,7 +26,7 @@ describe('UninstallServiceComponent', () => {
   let fixture: ComponentFixture<UninstallServiceComponent>;
   let electronService: FakeElectronService;
   const service: ElectronService = TestBed.get(ElectronService);
-  
+
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -42,11 +42,11 @@ describe('UninstallServiceComponent', () => {
         MatInputModule,
         BrowserAnimationsModule,
         MatPaginatorModule,
-        MatDialogModule, 
+        MatDialogModule,
         MatButtonModule,
         MatSlideToggleModule,
         MatCheckboxModule,
-        MatTableModule, 
+        MatTableModule,
         MatListModule,
         MatIconModule,
         MatSnackBarModule
@@ -89,8 +89,8 @@ describe('UninstallServiceComponent', () => {
     //     params: ['ok']
     //   });
       expect(component).toBeTruthy();
-    //}
-    
+    // }
+
   });
 
 });
