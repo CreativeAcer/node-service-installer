@@ -14,11 +14,11 @@ import { FakeElectronService } from '../../testservice/fake-electron.service';
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
-  
+
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ 
+      declarations: [
         HeaderComponent
       ],
       providers: [ElectronService],
@@ -48,7 +48,7 @@ describe('HeaderComponent', () => {
     //   });
       expect(component).toBeTruthy();
     // }
-    
+
   });
   // it('should create', inject([service, component], (object) => {
   //   expect(object).toBeTruthy();

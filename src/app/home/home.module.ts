@@ -26,21 +26,21 @@ import {  TruncatePipe }   from '../shared/pipe/limitto';
 
 
 @NgModule({
-  declarations: [HomeComponent, InstallServiceComponent, UninstallServiceComponent,TruncatePipe],
+  declarations: [HomeComponent, InstallServiceComponent, UninstallServiceComponent, TruncatePipe],
   imports: [
-    CommonModule, 
-    SharedModule, 
+    CommonModule,
+    SharedModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    HomeRoutingModule, 
+    HomeRoutingModule,
     BrowserAnimationsModule,
     MatPaginatorModule,
-    MatDialogModule, 
+    MatDialogModule,
     MatButtonModule,
     MatSlideToggleModule,
     MatCheckboxModule,
-    MatTableModule, 
+    MatTableModule,
     MatListModule,
     MatIconModule,
     MatSnackBarModule],

@@ -30,7 +30,7 @@ describe('InstallServiceComponent', () => {
   let fixture: ComponentFixture<InstallServiceComponent>;
   let electronService: FakeElectronService;
   const service: ElectronService = TestBed.get(ElectronService);
-  
+
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -47,11 +47,11 @@ describe('InstallServiceComponent', () => {
         MatInputModule,
         BrowserAnimationsModule,
         MatPaginatorModule,
-        MatDialogModule, 
+        MatDialogModule,
         MatButtonModule,
         MatSlideToggleModule,
         MatCheckboxModule,
-        MatTableModule, 
+        MatTableModule,
         MatListModule,
         MatIconModule,
         MatSnackBarModule
@@ -78,8 +78,8 @@ describe('InstallServiceComponent', () => {
     //     params: ['error']
     //   });
       expect(component).toBeTruthy();
-    //}
-    
+    // }
+
   });
   // it('should create', inject([service, component], (object) => {
   //   expect(object).toBeTruthy();

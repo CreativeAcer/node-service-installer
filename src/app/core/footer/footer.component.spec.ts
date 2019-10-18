@@ -11,7 +11,7 @@ describe('FooterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ 
+      declarations: [
         FooterComponent
       ],
       providers: [ElectronService ],
@@ -31,7 +31,7 @@ describe('FooterComponent', () => {
     //   component = fixture.componentInstance;
     //   fixture.detectChanges();
     // });
-    
+
   });
 
   it('should create', () => {
@@ -41,6 +41,6 @@ describe('FooterComponent', () => {
   // it('should create', inject([service, component], (object) => {
   //   expect(object).toBeTruthy();
   // }));
-  
-  
+
+
 });
