@@ -32,6 +32,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
   ],
+  // schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
     HeaderComponent, FooterComponent, SidebarComponent
   ]

@@ -7,6 +7,7 @@ import * as childProcess from 'child_process';
 import * as fs from 'fs';
 import { Subject } from 'rxjs/internal/Subject';
 import { Observable } from 'rxjs/internal/Observable';
+import { ShellSetting } from '../../../interface/IShellSetting';
 
 @Injectable({
   providedIn: 'root'

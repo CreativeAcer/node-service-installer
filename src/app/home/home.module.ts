@@ -21,13 +21,12 @@ import { HomeComponent } from './home.component';
 import { SharedModule } from '../shared/shared.module';
 import { InstallServiceComponent } from '../install-service/install-service.component';
 import { UninstallServiceComponent } from '../uninstall-service/uninstall-service.component';
-import { ListservicesComponent } from '../listservices/listservices.component';
 
 import {  TruncatePipe }   from '../shared/pipe/limitto';
 
 
 @NgModule({
-  declarations: [HomeComponent, InstallServiceComponent, UninstallServiceComponent, ListservicesComponent,TruncatePipe],
+  declarations: [HomeComponent, InstallServiceComponent, UninstallServiceComponent,TruncatePipe],
   imports: [
     CommonModule, 
     SharedModule, 
@@ -45,6 +44,6 @@ import {  TruncatePipe }   from '../shared/pipe/limitto';
     MatListModule,
     MatIconModule,
     MatSnackBarModule],
-  entryComponents: [ListservicesComponent]
+  entryComponents: []
 })
 export class HomeModule {}

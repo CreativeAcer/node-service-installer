@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoadingscreenComponent } from './loadingscreen.component';
+import { ElectronService } from '../core/services/electron/electron.service';
+
+import { FakeElectronService } from '../testservice/fake-electron.service';
 
 describe('LoadingscreenComponent', () => {
   let component: LoadingscreenComponent;
@@ -8,7 +11,8 @@ describe('LoadingscreenComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoadingscreenComponent ]
+      declarations: [ LoadingscreenComponent ],
+      providers: [ElectronService]
     })
     .compileComponents();
   }));
