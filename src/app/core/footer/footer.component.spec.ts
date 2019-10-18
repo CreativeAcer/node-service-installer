@@ -1,10 +1,9 @@
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FooterComponent } from './footer.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { ElectronService } from '../services';
 
-import { FakeElectronService } from '../../testservice/fake-electron.service';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;

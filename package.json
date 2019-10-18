@@ -71,6 +71,7 @@
     "jasmine-core": "3.4.0",
     "jasmine-spec-reporter": "4.2.1",
     "karma": "4.2.0",
+    "karma-electron": "6.3.0",
     "karma-chrome-launcher": "3.0.0",
     "karma-coverage-istanbul-reporter": "2.1.0",
     "karma-jasmine": "2.0.1",
@@ -95,6 +96,7 @@
     "@angular/cdk": "^8.2.0",
     "@angular/forms": "^8.0.0 || ^9.0.0-0",
     "@angular/material": "^8.2.0",
+    "karma-electron": "^6.3.0",
     "node-windows": "^0.1.14"
   }
 }
