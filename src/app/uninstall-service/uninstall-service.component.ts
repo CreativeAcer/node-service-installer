@@ -1,9 +1,6 @@
 import { Component, OnInit, NgZone, ViewChild, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
 import { ElectronService } from '../core/services';
-import { ListservicesComponent } from '../listservices/listservices.component';
-import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { of } from 'rxjs/internal/observable/of';
 import { MatPaginator } from '@angular/material/paginator';
 import { ServiceModel } from '../interface/IService';
 import { WindowsServiceModel } from '../interface/IWindowsService';
