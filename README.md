@@ -72,7 +72,7 @@ This project is based on the following projects
 Clone this repository locally :
 
 ``` bash
-https://github.com/CreativeAcer/ServiceInstallerGUI.git
+https://github.com/CreativeAcer/node-service-installer.git
 ```
 
 Install dependencies with npm :
