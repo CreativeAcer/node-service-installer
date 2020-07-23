@@ -63,16 +63,16 @@ export class InstallServiceComponent implements OnInit {
         extensions: ['js']
       }],
       properties: ['openFile']
-    },
-    function (filepaths, bookmarks) {
-      if (filepaths === undefined) {
+    }).then((data) => {
+        if (data.filePaths === undefined) {
+          return;
+        }
+        if (data.filePaths && data.filePaths[0]) {
+          this.installForm.controls['scriptPath'].setValue(data.filePaths[0]);
+        }
         return;
       }
-      if (filepaths && filepaths[0]) {
-        this.installForm.controls['scriptPath'].setValue(filepaths[0]);
-      }
-      return;
-    }.bind(this));
+    )
   }
 
   install() {
