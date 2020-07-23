@@ -54,9 +54,9 @@ Click uninstall next to the script you want to uninstall or in case of windows s
 
 Currently runs with:
 
-- Angular v8.1.3
-- Electron v6.0.2
-- Electron Builder v21.2.0
+- Angular v9.1.12
+- Electron v9.1.0
+- Electron Builder v22.7.0
 
 /!\ Angular 8.0 CLI needs Node 10.9 or later to work.
 
